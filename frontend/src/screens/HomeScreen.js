@@ -9,10 +9,10 @@ const HomeScreen = () => {
 
             <div className='btn-main-container'>
                 <div className='btn-container'>
-                    <Link to='/login' className='btn btn-primary btn-lg'>Login for Students</Link>
+                    <Link to='/login/student' className='btn btn-primary btn-lg'>Login for Students</Link>
                 </div>
                 <div className='btn-container'>
-                    <Link to='/login' className='btn btn-primary btn-lg'>Login for Staff</Link>
+                    <Link to='/login/staff' className='btn btn-primary btn-lg'>Login for Staff</Link>
                 </div>
             </div>
         </>

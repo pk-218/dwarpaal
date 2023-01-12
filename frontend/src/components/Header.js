@@ -16,9 +16,9 @@ const Header = () => {
                             {/* <Link to='/cart'>
                                 <Nav.Link><i class="fa-solid fa-cart-shopping"></i> Cart</Nav.Link>
                             </Link> */}
-                            <Link to='/login'>
-                                <Nav.Link><i class="fa-solid fa-right-to-bracket"></i> Sign Up</Nav.Link>
-                            </Link>
+                            {/* <Link to='/login'>
+                                <Nav.Link><i class="fa-solid fa-right-to-bracket"></i> Login</Nav.Link>
+                            </Link> */}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
