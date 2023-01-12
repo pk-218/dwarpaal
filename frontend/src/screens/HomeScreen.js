@@ -14,6 +14,9 @@ const HomeScreen = () => {
                 <div className='btn-container'>
                     <Link to='/login/staff' className='btn btn-primary btn-lg'>Login for Staff</Link>
                 </div>
+                <div className='btn-container'>
+                    <Link to='/request-form' className='btn btn-primary btn-lg'>Request Form</Link>
+                </div>
             </div>
         </>
     )
