@@ -8,7 +8,7 @@ const connOptions = {
 };
 
 // getting mongo uri form the environment variable
-const MONGO_URI = process.env.MONGO_URI || '';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://user:user@cluster0.c2e3xcy.mongodb.net/dwarpal?retryWrites=true&w=majority';
 // function to connect with mongo-database
 const connectToDB = async () => {
   try {
