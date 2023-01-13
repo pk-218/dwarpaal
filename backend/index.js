@@ -15,7 +15,7 @@ app.use(json());
 
 
 // seting up router's
-app.use('/user', user);
+app.use('api/user', user);
 
 // if encounter with the path that is not known, unknow paths responding with 404 status code
 app.use('*', (req, res) => {
