@@ -6,6 +6,9 @@ import credentialsRouter from "./routes/credentials.js";
 import * as dotenv from "dotenv";
 import usersRouter from "./routes/user.js";
 import adminRouter from "./routes/admin.js";
+import authRouter from "./routes/auth.js";
+import homeRouter from "./routes/home.js";
+import formRouter from "./routes/form.js"
 dotenv.config();
 
 // creating express app
@@ -29,6 +32,7 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 
 // seting up routers
+app.use("/home", homeRouter)
 app.use("/api/user", usersRouter);
 app.use("/api/credentials", credentialsRouter);
 app.use("/api/admin", adminRouter)
