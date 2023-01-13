@@ -16,3 +16,5 @@ class Credentials {
     };
   }
 }
+
+export default Credentials

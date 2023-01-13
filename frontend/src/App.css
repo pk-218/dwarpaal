@@ -1,0 +1,47 @@
+html,
+body {
+  height: 100%;
+}
+
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row;
+  /* flex-basis: 300px; */
+  /* flex-wrap: wrap; */
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.form-container {
+  width: 400px;
+}
+
+.form-button {
+  width: 400px;
+  margin-top: 13px;
+  padding: 7px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.header-branding {
+  padding: 11px;
+}

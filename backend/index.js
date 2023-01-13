@@ -1,5 +1,6 @@
 // importing necessary modules
 import express, { urlencoded, json } from "express";
+import session from "express-session";
 import { initPostgresDB } from "./utils/sqlConfig.js";
 import credentialsRouter from "./routes/credentials.js";
 import * as dotenv from "dotenv";

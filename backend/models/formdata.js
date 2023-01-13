@@ -3,7 +3,8 @@ import Sequelize from "sequelize";
 const formdata = (sequelize) => {
     const Form = sequelize.define("Forms", {
       id: {
-        type: Sequelize.STRING  
+        type: Sequelize.STRING,
+        primaryKey: true
       },
       email: {
         type: Sequelize.STRING
