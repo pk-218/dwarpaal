@@ -117,10 +117,19 @@ const memoryUsagePerUser = (req, res) => {
     });
 };
 
-export default {
-  getAllUsers,
-  getLoggedInUsers,
-  memoryUsagePerUser,
-  createUser,
-  deleteUser,
-};
+const diskOccupied = (req, res) => {
+  ssh.connect({
+      host: '170.187.251.66',
+      username: 'root',
+      password: 'navnavtihi++'
+    })
+    .then(function() {
+      ssh.execCommand(`./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${disk_occupied}' --json;`, { cwd:'./' })
+      .then(function(result) {
+          ssh.dispose()
+          res.send(JSON.parse(result.stdout))
+      })
+    })
+}
+
+export default {getAllUsers, getLoggedInUsers, memoryUsagePerUser, createUser, diskOccupied, deleteUser};
