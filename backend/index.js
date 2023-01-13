@@ -13,7 +13,7 @@ const app = express();
 app.use(urlencoded({ extended: false }));
 app.use(json());
 
-// seting up router's
+// seting up routers
 app.use("/api/user", usersRouter);
 app.use("/api/credentials", credentialsRouter);
 

@@ -12,4 +12,4 @@ userRouter.post("/sendcode", User.sendCode);
 userRouter.post("/verifycode", User.verifyCode);
 
 // exporting defualt userRouter
-export default userRouter;
+export default usersRouter;
