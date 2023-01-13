@@ -56,10 +56,10 @@ export default function PaymentForm({ formData, setFormData }) {
             onChange={(e) => {
               setFormData({
                 ...formData,
-                todate: e.target.value,
+                reqCPU: e.target.value,
               });
             }}
-            value={formData.todate}
+            value={formData.reqCPU}
           />
         </Grid>
         <Grid item xs={12} md={6}>
