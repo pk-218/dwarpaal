@@ -1,13 +1,20 @@
-const user = (sequelize, Sequelize) => {
+import Sequelize from "sequelize";
+
+const user = (sequelize) => {
     const User = sequelize.define("users", {
-      username: {
-        type: Sequelize.STRING
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true
       },
       email: {
         type: Sequelize.STRING
       },
-      password: {
-        type: Sequelize.STRING
+      verificationCode: {
+        type: Sequelize.INTEGER
+      },
+      verifed:{
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       }
     });
   
