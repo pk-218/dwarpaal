@@ -31,7 +31,7 @@ app.use('*', (req, res) => {
 
 
 const PORT = process.env.PORT || 3000;
-initPostgresDB();
+// initPostgresDB();
 
 app.listen(PORT, _ => {
     console.log(`The server is running on Port : ${PORT}`)
