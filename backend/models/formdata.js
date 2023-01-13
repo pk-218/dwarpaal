@@ -9,6 +9,18 @@ const formdata = (sequelize) => {
       email: {
         type: Sequelize.STRING
       },
+      firstName: {
+        type: Sequelize.STRING
+      },
+      lastName: {
+        type: Sequelize.STRING
+      },
+      yearOfStudy: {
+        type: Sequelize.STRING
+      },
+      profInCharge: {
+        type: Sequelize.STRING
+      },
       title: {
         type: Sequelize.STRING
       },
@@ -47,9 +59,6 @@ const formdata = (sequelize) => {
       },
       containers_version: {
         type: Sequelize.STRING
-      },
-      date: {
-        type: Sequelize.DATE
       },
       from_date: {
         type: Sequelize.DATE
