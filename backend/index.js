@@ -1,7 +1,7 @@
 // importing necessary modules
 import express, { urlencoded, json } from 'express';
 import connectToDatabase from './utils/dbConfig.js';
-import sqlConfig from './utils/sqlConfig.js';
+import { initPostgresDB } from './utils/sqlConfig.js';
 import user from './routes/user.js';
 import * as dotenv from 'dotenv';
 dotenv.config()
@@ -31,7 +31,7 @@ app.use('*', (req, res) => {
 
 
 const PORT = process.env.PORT || 3000;
-sqlConfig.initPostgresDB();
+initPostgresDB();
 
 app.listen(PORT, _ => {
     console.log(`The server is running on Port : ${PORT}`)

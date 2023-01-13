@@ -43,10 +43,10 @@ function initial() {
   }
 
 const initPostgresDB = () => {
-    db.sequelize.sync({force: true}).then(() => {
+    db.conn.sync({force: true}).then(() => {
         console.log('Drop and Resync Database with { force: true }');
         initial();
     });
 }
   
-export default {initPostgresDB, db};
+export {initPostgresDB, db};
