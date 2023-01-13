@@ -6,6 +6,7 @@ import credentialsRouter from "./routes/credentials.js";
 import * as dotenv from "dotenv";
 import usersRouter from "./routes/user.js";
 import adminRouter from "./routes/admin.js";
+import authRouter from "./routes/auth.js";
 dotenv.config();
 
 // creating express app
@@ -31,7 +32,9 @@ app.use(session(sessionConfig));
 // seting up routers
 app.use("/api/user", usersRouter);
 app.use("/api/credentials", credentialsRouter);
-app.use("/api/admin", adminRouter)
+app.use("/api/admin", adminRouter);
+app.use("/api/auth", authRouter);
+
 
 // if encounter with the path that is not known, unknow paths responding with 404 status code
 app.use("*", (req, res) => {
