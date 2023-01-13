@@ -7,6 +7,6 @@ const isLoggedIn = (req, res) => {
     return req.session.user.id != null
 }
 
-formRouter.post('/request-form', isLoggedIn, submitForm)
+formRouter.post('/', isLoggedIn, submitForm)
 
 export default formRouter;

@@ -31,10 +31,10 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 
 // seting up routers
+app.use("/home", homeRouter)
 app.use("/api/user", usersRouter);
 app.use("/api/credentials", credentialsRouter);
 app.use("/api/admin", adminRouter)
-app.use("/home", homeRouter)
 app.use("/request-form", formRouter)
 
 // if encounter with the path that is not known, unknow paths responding with 404 status code
