@@ -1,4 +1,4 @@
-class Credentials {
+export default class Credentials {
   constructor(username, password, expiration, status, id) {
     this.username = username;
     this.password = password;
