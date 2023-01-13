@@ -6,10 +6,19 @@ import credentialsRouter from "./routes/credentials.js";
 import * as dotenv from "dotenv";
 import usersRouter from "./routes/user.js";
 import adminRouter from "./routes/admin.js";
+import cors from "cors";
+
 dotenv.config();
 
 // creating express app
 const app = express();
+
+app.use(
+  cors({
+    origin: process.env.ORIGIN,
+    credentials: true,
+  })
+);
 
 //express middleware
 app.use(urlencoded({ extended: false }));
@@ -45,7 +54,7 @@ app.use("*", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 initPostgresDB();
 
 app.listen(PORT, (_) => {
