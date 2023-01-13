@@ -14,5 +14,5 @@ chpasswd <<<"$username:$password"
 chage -E $expiration $username
 
 # send the credentials to the backend with success message
-curl -X POST -H "Content-Type: application/json" -d '{"username": "'"$username"'", "password":"'"$password"'", "expiration":"'"$expiration"'", "id": "'"$id"'", "status": "'"200"'"}' https://dwarpal-production.up.railway.app/api/credentials/
+curl -X POST -H "Content-Type: application/json" -d '{"username": "'"$username"'", "password":"'"$password"'", "expiration":"'"$expiration"'", "id": "'"$id"'", "status": 200}' https://dwarpal-production.up.railway.app/api/credentials/
 
