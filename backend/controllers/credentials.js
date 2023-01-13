@@ -1,4 +1,4 @@
-import { db } from "../utils/sqlConfig";
+import { db } from "../utils/sqlConfig.js";
 
 const updateUserCredentials = (creds) => {
   db.user.update(
