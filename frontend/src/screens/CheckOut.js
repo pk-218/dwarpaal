@@ -30,7 +30,7 @@ function Copyright() {
   );
 }
 
-const steps = ["Project Details", "System Requirements", "Review your form"];
+const steps = ["Project Details", "System Requirements", "Form Confirmation"];
 
 const theme = createTheme();
 
@@ -116,12 +116,11 @@ export default function Checkout() {
           {activeStep === steps.length ? (
             <React.Fragment>
               <Typography variant="h5" gutterBottom>
-                Thank you for your order.
+                You have successfully submitted the Form.
               </Typography>
               <Typography variant="subtitle1">
-                Your order number is #2001539. We have emailed your order
-                confirmation, and will send you an update when your order has
-                shipped.
+                We will send you an email if your request has any
+                update.
               </Typography>
             </React.Fragment>
           ) : (
