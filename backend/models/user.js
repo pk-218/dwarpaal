@@ -15,6 +15,9 @@ const user = (sequelize) => {
       verifed:{
         type: Sequelize.BOOLEAN,
         defaultValue: false,
+      },
+      secret:{
+        type: Sequelize.STRING
       }
     });
   
