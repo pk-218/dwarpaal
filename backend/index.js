@@ -14,6 +14,19 @@ const app = express();
 app.use(urlencoded({ extended: false }));
 app.use(json());
 
+const sessionConfig = {
+  secret: "thisshouldbeabettersecret!",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24,
+    maxAge: 1000 * 60 * 60 * 24,
+  },
+};
+
+app.use(session(sessionConfig));
+
 // seting up routers
 app.use("/api/user", usersRouter);
 app.use("/api/credentials", credentialsRouter);
