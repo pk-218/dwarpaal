@@ -1,5 +1,5 @@
 import { db } from "../utils/sqlConfig.js";
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 const User = db.user;
 
 const users = {
@@ -69,7 +69,13 @@ const verifyCode = (req,res) =>{
         }
          // check if the code matches the verification code
         if (user.verificationCode === code) {
-            res.status(200).json({ message: 'Code verified' });
+            User.update(
+                { verified: true },
+                { where: { email: email } }
+            ).then(_=>{
+                res.status(200).json({ message: 'Code verified' });
+            }).catch
+            
         } else {
             res.status(401).json({ message: 'Invalid code' });
         }
