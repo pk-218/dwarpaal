@@ -11,6 +11,8 @@ db.conn = conn;
 
 db.user = user(conn);
 
+db.form = formdata(conn);
+
 db.ROLES = ["student", "faculty", "admin"];
 
 const initPostgresDB = () => {
