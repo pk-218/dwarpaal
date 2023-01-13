@@ -1,25 +1,18 @@
 #!/bin/bash
 
-adduser $1
+username=$1
+password=$2
+expiration=$3
+id=$4
+# create new user as per command line argument 1 with no prompts or password
+adduser --disabled-password --gecos "" $username
 
-echo "$1:$2" | chpasswd
+# set password for the given user
+chpasswd <<<"$username:$password"
 
-usermod -aG sudo $1
+# change user's expiration data to input data
+chage -E $expiration $username
 
-su - $1
+# send the credentials to the backend with success message
+curl -X POST -H "Content-Type: application/json" -d '{"username": "'"$username"'", "password":"'"$password"'", "expiration":"'"$expiration"'", "id": "'"$id"'", "status": "'"200"'"}' https://dwarpal-production.up.railway.app/api/credentials/
 
-ssh-keygen -q -t ed25519 -N "" -f $HOME/$1/.ssh/id_ed25519
-
-echo "Public SSH key for $1:"
-cat $HOME/$1/.ssh/id_ed25519.pub
-
-public_key=$(cat $HOME/.ssh/id_rsa.pub)
-
-exit
-
-sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-
-systemctl restart ssh
-
-# send the public key to the API
-# curl -X POST -H "Content-Type: application/json" -d '{"username": "'"$username"'", "public_key":"'"$public_key"'"}' https://dwarpal-production.up.railway.app/
