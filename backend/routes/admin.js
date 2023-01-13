@@ -6,5 +6,6 @@ const adminRouter = Router()
 adminRouter.get("/get-all-users",Admin.getAllUsers)
 adminRouter.get("/get-logged-in-users",Admin.getLoggedInUsers)
 adminRouter.get("/memory-usage-per-user",Admin.memoryUsagePerUser)
+adminRouter.post("/create-user",Admin.createUser)
 
 export default adminRouter
