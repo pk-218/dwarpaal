@@ -3,31 +3,14 @@ import Sequelize from "sequelize";
 import user from "../models/user.js";
 import role from "../models/role.js";
 
-const sequelize = new Sequelize(
-  "dwarpalDB",
-  "postgres",
-  "Password",
-  {
-    host: "localhost",
-    dialect: "postgres",
-    operatorsAliases: false,
-
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    }
-  }
-);
+const conn = new Sequelize('postgresql://postgres:JiHtxSMCthlvaPu89qKW@containers-us-west-122.railway.app:5605/railway');
 
 const db = {};
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
+db.conn = conn;
 
-db.user = user(sequelize, Sequelize);
-db.role = role(sequelize, Sequelize);
+db.user = user(conn);
+db.role = role(conn);
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
@@ -66,5 +49,4 @@ const initPostgresDB = () => {
     });
 }
   
-
-export default initPostgresDB;
+export default {initPostgresDB, db};

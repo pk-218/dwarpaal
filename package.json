@@ -1,5 +1,0 @@
-{
-  "dependencies": {
-    "passport-2fa-totp": "^0.0.1"
-  }
-}

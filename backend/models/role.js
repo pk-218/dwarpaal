@@ -1,4 +1,6 @@
-const role = (sequelize, Sequelize) => {
+import Sequelize from "sequelize";
+
+const role = (sequelize) => {
     const Role = sequelize.define("roles", {
       id: {
         type: Sequelize.INTEGER,
