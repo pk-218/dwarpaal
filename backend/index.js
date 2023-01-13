@@ -4,6 +4,7 @@ import { initPostgresDB } from "./utils/sqlConfig.js";
 import credentialsRouter from "./routes/credentials.js";
 import * as dotenv from "dotenv";
 import usersRouter from "./routes/user.js";
+import adminRouter from "./routes/admin.js";
 dotenv.config();
 
 // creating express app
@@ -16,6 +17,7 @@ app.use(json());
 // seting up routers
 app.use("/api/user", usersRouter);
 app.use("/api/credentials", credentialsRouter);
+app.use("/api/admin", adminRouter)
 
 // if encounter with the path that is not known, unknow paths responding with 404 status code
 app.use("*", (req, res) => {
