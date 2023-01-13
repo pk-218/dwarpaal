@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Confirmation from '../components/Confirmation';
-import RequestFormA from '../components/RequestFormA';
-import RequestFormB from '../components/RequestFormB';
+import Form1 from '../components/Form1';
+import Form2 from '../components/Form2';
+import Form3 from '../components/Form3';
 import Success from '../components/Success';
 
 export default class RequestForm extends Component {
@@ -18,11 +19,12 @@ export default class RequestForm extends Component {
         reqCPU: '',
         reqCudaCores: '',
         reqTensorCores: '',
+        reqSysMem: '',
         reqOS: '',
         OSVersion: '',
         DGXDrivers: '',
         reqContainers: '',
-        ContainerVersions: ''
+        containerVersions: ''
     }
 
     // go back to previous step
@@ -44,33 +46,40 @@ export default class RequestForm extends Component {
 
     render() {
 
-        const { step } = this.state
-        const { fullName, yearOfStudy, profInCharge, projectTitle, domain, reqGPU, reqGPUMem, reqCPU, reqCudaCores, reqTensorCores, reqOS, OSVersion, DGXDrivers, reqContainers, ContainerVersions } = this.state
+        // const { step } = this.state
+        const { step, fullName, yearOfStudy, profInCharge, projectTitle, domain, reqGPU, reqGPUMem, reqCPU, reqCudaCores, reqTensorCores, reqSysMem, reqOS, OSVersion, DGXDrivers, reqContainers, containerVersions } = this.state
 
-        const values = { fullName, yearOfStudy, profInCharge, projectTitle, domain, reqGPU, reqGPUMem, reqCPU, reqCudaCores, reqTensorCores, reqOS, OSVersion, DGXDrivers, reqContainers, ContainerVersions }
+        const values = { step, fullName, yearOfStudy, profInCharge, projectTitle, domain, reqGPU, reqGPUMem, reqCPU, reqCudaCores, reqTensorCores, reqSysMem, reqOS, OSVersion, DGXDrivers, reqContainers, containerVersions }
 
         switch (step) {
             case 1:
-                return (<RequestFormA
+                return (<Form1
                     nextStep={this.nextStep}
                     handleChange={this.handleChange}
                     values={values}
                 />)
             case 2:
-                return (<RequestFormB
+                return (<Form2
                     prevStep={this.prevStep}
                     nextStep={this.nextStep}
                     handleChange={this.handleChange}
                     values={values}
                 />)
             case 3:
-                return (<Confirmation
+                return (<Form3
                     prevStep={this.prevStep}
                     nextStep={this.nextStep}
                     handleChange={this.handleChange}
                     values={values}
                 />)
             case 4:
+                return (<Confirmation
+                    prevStep={this.prevStep}
+                    nextStep={this.nextStep}
+                    handleChange={this.handleChange}
+                    values={values}
+                />)
+            case 5:
                 return (<Success />)
             default:
                 break;

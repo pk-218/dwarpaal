@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const Header = () => {
     return (
         <header>
-            <Navbar bg="primary" variant='dark' expand="lg">
+            <Navbar bg="primary" variant='dark' expand="lg" className='header-branding'>
                 <Container>
                     <Link to='/'>
                         <Navbar.Brand>Dwarpaal</Navbar.Brand>

@@ -53,9 +53,9 @@ const StudentLoginForm = () => {
                                 <Form.Text className="text-muted">
                                     {errors.regId?.message}
                                 </Form.Text>
-                                {/* <div class="invalid-feedback">
+                                <div className="invalid-feedback">
                                     {errors.regId?.message}
-                                </div> */}
+                                </div>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
