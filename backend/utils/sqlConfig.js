@@ -1,5 +1,6 @@
 import Sequelize from "sequelize";
 import user from "../models/user.js";
+import formdata from "../models/formdata.js"
 
 const conn = new Sequelize(
   "postgresql://postgres:JiHtxSMCthlvaPu89qKW@containers-us-west-122.railway.app:5605/railway"

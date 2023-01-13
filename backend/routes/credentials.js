@@ -1,5 +1,6 @@
 import { Router } from "express";
-import updateUserCredentials from "../controllers/credentials";
+import updateUserCredentials from "../controllers/credentials.js";
+import Credentials from "../models/credentials.dto.js";
 
 const credentialsRouter = Router();
 
