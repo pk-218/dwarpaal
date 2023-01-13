@@ -16,6 +16,7 @@ import PersonalDetail from "../components/Student/RequestForm/PersonalDetail";
 import PaymentForm from "../components/Student/RequestForm/SystemRequirement";
 import Review from "../components/Student/RequestForm/Review";
 import { useState } from "react";
+import axios from "axios";
 
 function Copyright() {
   return (
@@ -42,7 +43,8 @@ export default function Checkout() {
     lastName: "",
     yearOfStudy: "",
     profInCharge: "",
-    period: "",
+    fromDate: "",
+    toDate: "",
     projectTitle: "",
     domain: "",
     reqGPU: "",
@@ -59,8 +61,6 @@ export default function Checkout() {
   });
 
   function getStepContent(step) {
-
-
     switch (step) {
       case 0:
         return <PersonalDetail formData={formData} setFormData={setFormData} />;
@@ -72,6 +72,17 @@ export default function Checkout() {
         throw new Error("Unknown step");
     }
   }
+
+  function submitForm() {
+    axios.post("http://localhost:8000/api/auth/sendcode/", {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      yearOfStudy: formData.yearOfStudy,
+      profInCharge: formData.profInCharge,
+      domain: formData.domain,
+    });
+  }
+
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -83,21 +94,6 @@ export default function Checkout() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* <AppBar
-        position="absolute"
-        color="default"
-        elevation={0}
-        sx={{
-          position: 'relative',
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
-        }}
-      >
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Company name
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
       <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
         <Paper
           variant="outlined"
@@ -115,12 +111,12 @@ export default function Checkout() {
           </Stepper>
           {activeStep === steps.length ? (
             <React.Fragment>
+              {submitForm()}
               <Typography variant="h5" gutterBottom>
                 You have successfully submitted the Form.
               </Typography>
               <Typography variant="subtitle1">
-                We will send you an email if your request has any
-                update.
+                We will send you an email if your request has any update.
               </Typography>
             </React.Fragment>
           ) : (
