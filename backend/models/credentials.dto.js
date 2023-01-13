@@ -17,4 +17,4 @@ class Credentials {
   }
 }
 
-export default Credentials
+export default Credentials;

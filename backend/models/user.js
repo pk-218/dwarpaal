@@ -3,7 +3,8 @@ import Sequelize, { DataTypes } from "sequelize";
 const user = (sequelize) => {
   const User = sequelize.define("users", {
     id: {
-      type: Sequelize.ARRAY(DataTypes.CHAR(9)),
+      // type: Sequelize.ARRAY(DataTypes.CHAR(9)),
+      type: Sequelize.INTEGER,
       primaryKey: true,
     },
     email: {
