@@ -28,6 +28,10 @@ const user = (sequelize) => {
     role: {
       type: Sequelize.ENUM("student", "faculty", "admin"),
     },
+    secret:{
+      type: Sequelize.STRING,
+      defaulValue: ""
+    }
   });
 
   return User;
