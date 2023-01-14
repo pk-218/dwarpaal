@@ -28,7 +28,7 @@ function Copyright() {
   );
 }
 
-const steps = ["Project Details", "System Requirements", "Review your form"];
+const steps = ["Project Details", "System Requirements", "Form Confirmation"];
 
 const FormButtonContained = styled(Button)(() => ({
   backgroundColor: '#284b63',
@@ -142,10 +142,11 @@ export default function Checkout() {
           {activeStep === steps.length ? (
             <React.Fragment>
               <Typography variant="h5" gutterBottom>
-                Your access form has been submitted.
+                You have successfully submitted the Form.
               </Typography>
               <Typography variant="subtitle1">
-                You will receive your credentials within 3-5 working days. Do check the notifications for an early announcement.
+                We will send you an email if your request has any
+                update.
               </Typography>
             </React.Fragment>
           ) : (
