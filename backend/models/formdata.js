@@ -3,9 +3,22 @@ import Sequelize from "sequelize";
 const formdata = (sequelize) => {
     const Form = sequelize.define("Forms", {
       id: {
-        type: Sequelize.STRING  
+        type: Sequelize.STRING,
+        primaryKey: true
       },
       email: {
+        type: Sequelize.STRING
+      },
+      firstName: {
+        type: Sequelize.STRING
+      },
+      lastName: {
+        type: Sequelize.STRING
+      },
+      yearOfStudy: {
+        type: Sequelize.STRING
+      },
+      profInCharge: {
         type: Sequelize.STRING
       },
       title: {
@@ -46,9 +59,6 @@ const formdata = (sequelize) => {
       },
       containers_version: {
         type: Sequelize.STRING
-      },
-      date: {
-        type: Sequelize.DATE
       },
       from_date: {
         type: Sequelize.DATE

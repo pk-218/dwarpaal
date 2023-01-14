@@ -1,10 +1,13 @@
-import { Router } from "express"
-import Admin from "../controllers/admin.js"
+import { Router } from "express";
+import Admin from "../controllers/admin.js";
 
-const adminRouter = Router()
+const adminRouter = Router();
 
-adminRouter.get("/get-all-users",Admin.getAllUsers)
-adminRouter.get("/get-logged-in-users",Admin.getLoggedInUsers)
-adminRouter.get("/memory-usage-per-user",Admin.memoryUsagePerUser)
+adminRouter.get("/get-all-users", Admin.getAllUsers);
+adminRouter.get("/get-logged-in-users", Admin.getLoggedInUsers);
+adminRouter.get("/memory-usage-per-user", Admin.memoryUsagePerUser);
+adminRouter.post("/create-user", Admin.createUser);
+adminRouter.post("/delete-user", Admin.deleteUser);
+adminRouter.get("/disk-occupied", Admin.diskOccupied)
 
-export default adminRouter
+export default adminRouter;

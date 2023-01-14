@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "reg_id": "191081028",
+            "creation_date": "01/01/2023",
+            "expiry_date": "01/03/2023",
+            "revoked": false
+        },
+        {
+            "reg_id": "191080040",
+            "creation_date": "01/02/2023",
+            "expiry_date": "01/04/2023",
+            "revoked": false
+        },
+        {
+            "reg_id": "191081036",
+            "creation_date": "01/03/2023",
+            "expiry_date": "01/05/2023",
+            "revoked": false
+        }
+    ]
+}

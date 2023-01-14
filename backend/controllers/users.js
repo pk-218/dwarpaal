@@ -2,10 +2,20 @@ import { db } from "../utils/sqlConfig.js";
 import nodemailer from 'nodemailer';
 const User = db.user;
 
-const findUser = (req, res){
-    User.findAll().then((users)=>{
-        res.status(200).send({users});
+const findOneUser = (req, res)=>{
+    const {email} = req.body;
+    User.findOne({
+        where: {
+            email: email
+        }
+    }).then((user)=>{
+        if(!user){
+            res.status(404).send({sucess:false,message:"User not found!"});
+        }
+        else{
+            res.status(200).send({sucess:true,user});
+        }
     });
 }
 
-export { findUser };
+export { findOneUser };
