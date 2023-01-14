@@ -5,13 +5,78 @@ import PersonIcon from '@mui/icons-material/Person';
 import StorageIcon from '@mui/icons-material/Storage';
 import StatBox from "../components/StatBox";
 import { mockTransactions } from "../data/mockData";
-import LineChart from "../components/LineChart";
+import {Pie} from "react-chartjs-2";
+import {Chart as ChartJS, ArcElement, Tooltip, Legend} from "chart.js";
+
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { chartColours } from "./colours";
 
 const Dashboard = () => {
+    ChartJS.register(ArcElement, Tooltip, Legend);
     // const theme = useTheme();
     // const colors = tokens(theme.palette.mode);
+    const [allUsers,setAllUsers] = useState([]);
+    const [loggedInUsers, setLoggedInUsers] = useState([]);
+    const [memoryUsage, setMemoryUsage] = useState([]);
+    const [diskOccupied, setDiskOccupied] = useState([]);
+    var nums = [145.87, 223.8, 111.34, 45, 65.6]
+    var labels = ['pkkhushalani_b19', 'sdpawar_b19', "cmbaghele_b19","psthakare_b19","abcat_b19"]
+    
+    async function GAU()
+    {
+        var as = await axios.get("http://localhost:5000/api/admin/get-all-users").then((res)=>{
+            setAllUsers(res.data)
+        })
+        return as
+    }
 
+    async function LIU()
+    {
+        return await axios.get("http://localhost:5000/api/admin/get-logged-in-users").then((res)=>{
+            setLoggedInUsers(res.data)
+        })
+    } 
+
+    async function MUPU()
+    {
+        return await axios.get("http://localhost:5000/api/admin/memory-usage-per-user").then((res)=>{
+            setMemoryUsage(res.data)
+            for(var i=0;i<res.data.length;i++)
+            {
+                nums.push(res.data[i]['total_mem_usage'])
+                labels.push(res.data[i]['username'])
+            }
+            console.log(nums, labels)
+        })
+    }
+
+    async function DO() {
+        
+        return await axios.get("http://localhost:5000/api/admin/disk-occupied").then((res)=>{
+            setDiskOccupied(res.data)
+        })
+    }
+
+    
+
+    useEffect(()=>
+    {
+
+        setTimeout(()=>{
+            GAU()
+        },0);
+        setTimeout(()=>{
+            LIU()
+        },4000);
+        setTimeout(()=>{
+            MUPU()
+        },8000);
+        setTimeout(()=>{
+            DO()
+        },12000);
+    }, []);
     return (
         <Box m="20px">
             {/* GRID & CHARTS */}
@@ -31,7 +96,7 @@ const Dashboard = () => {
                 >
                     <Link to='/dashboard/grid' style={{ margin: 0 }}>
                         <StatBox
-                            title="15"
+                            title = {`${allUsers.length}`}
                             subtitle="Users in System"
                             icon={
                                 <PeopleAltIcon
@@ -49,7 +114,7 @@ const Dashboard = () => {
                     justifyContent="center"
                 >
                     <StatBox
-                        title="7"
+                        title={`${loggedInUsers.length}`}
                         subtitle="Users currently logged in"
                         icon={
                             <PersonIcon
@@ -67,7 +132,7 @@ const Dashboard = () => {
                 >
                     <StatBox
                         title="15 GB"
-                        subtitle="Memory is Use"
+                        subtitle="Memory in Use"
                         icon={
                             <StorageIcon
                                 sx={{ color: 'white', fontSize: "36px" }}
@@ -97,17 +162,24 @@ const Dashboard = () => {
                             >
                                 Memory in Use
                             </Typography>
-                            <Typography
-                                variant="h4"
-                                fontWeight="bold"
-                                color="#fdde6c"
-                            >
-                                15 GB
-                            </Typography>
+
+                            <Pie
+                            data={{
+                                labels: labels,
+                                datasets: [{data: nums, backgroundColor: chartColours, hoverBackgroundColor: chartColours}]
+                            }}
+                            options = {{elements: {
+                                arc: {
+                                    borderWidth: 0
+                                }
+                            }}}
+                            />
+
+                            
                         </Box>
                     </Box>
                     <Box height="240px" m="-20px 0 0 0">
-                        <LineChart isDashboard={true} />
+                    
                     </Box>
                 </Box>
                 <Box
