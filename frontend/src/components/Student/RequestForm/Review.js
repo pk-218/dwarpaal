@@ -41,9 +41,14 @@ export default function Review({ formData, setFormData }) {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Form Summary {formData.firstName}
+        Permission Letter to access DGX Station Installed in CE & IT Dept, VJTI
       </Typography>
-      <List disablePadding>
+
+      <Typography >
+        I the undersigned, a student of CE & IT department , {formData.yearOfStudy } year and working under {formData.profInCharge } for the academic project would like to report access of DGX station installed in Department of Computer Engineering & IT, VJTI, Mumbai from Date {formData.fromdate} till {formData.todate}. 
+      </Typography>
+      
+      {/* <List disablePadding>
         {products.map((product) => (
           <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
             <ListItemText primary={product.name} secondary={product.desc} />
@@ -57,8 +62,8 @@ export default function Review({ formData, setFormData }) {
             $34.06
           </Typography>
         </ListItem>
-      </List>
-      <Grid container spacing={2}>
+      </List> */}
+      {/* <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
@@ -83,7 +88,7 @@ export default function Review({ formData, setFormData }) {
             ))}
           </Grid>
         </Grid>
-      </Grid>
+      </Grid> */}
     </React.Fragment>
   );
 }
