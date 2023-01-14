@@ -10,6 +10,7 @@ import Dashboard from './screens/Dashboard';
 import UserInfoGrid from './components/UserInfoGrid';
 import Checkout from './screens/CheckOut';
 import { useState } from 'react';
+import FAQ from './screens/FAQ';
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(false)
@@ -28,6 +29,7 @@ function App() {
             <Route path='/login/student' element={<StudentLoginForm />} />
             <Route path='/login/staff' element={<StaffLoginForm />} />
             <Route path='/request-form' element={<Checkout />} />
+            <Route path='/faq' element={<FAQ />} />
           </Routes>
         }
 
