@@ -16,6 +16,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="reqGPU"
             label="No of GPU Required"
             fullWidth
+            type="number"
             autoComplete="cc-name"
             variant="outlined"
             onChange={(e) => {
@@ -51,6 +52,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="reqCPU"
             label="No of CPUs Required"
             fullWidth
+            type="number"
             autoComplete="cc-name"
             variant="outlined"
             onChange={(e) => {
@@ -68,15 +70,16 @@ export default function PaymentForm({ formData, setFormData }) {
             id="reqCUDACores"
             label="No of  CUDA cores Required"
             fullWidth
+            type="number"
             autoComplete="cc-name"
             variant="outlined"
             onChange={(e) => {
               setFormData({
                 ...formData,
-                reqCPU: e.target.value,
+                reqCUDACores: e.target.value,
               });
             }}
-            value={formData.reqCPU}
+            value={formData.reqCUDACores}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -86,6 +89,7 @@ export default function PaymentForm({ formData, setFormData }) {
             label="No of Tensor Cores"
             fullWidth
             autoComplete="cc-name"
+            type="number"
             variant="outlined"
             onChange={(e) => {
               setFormData({
@@ -103,6 +107,7 @@ export default function PaymentForm({ formData, setFormData }) {
             label="System Memory Required"
             fullWidth
             autoComplete="cc-name"
+            type="number"
             variant="outlined"
             onChange={(e) => {
               setFormData({

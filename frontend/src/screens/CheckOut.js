@@ -73,18 +73,12 @@ export default function Checkout() {
     }
   }
 
-  function submitForm() {
-    axios.post("http://localhost:8000/api/auth/sendcode/", {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      yearOfStudy: formData.yearOfStudy,
-      profInCharge: formData.profInCharge,
-      domain: formData.domain,
-    });
-  }
-
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    if (activeStep == steps.length -1) {
+      console.log("form submitted successfully ! ");
+      axios.post("http://localhost:5000/request-form/",formData );
+    }
   };
 
   const handleBack = () => {
@@ -111,7 +105,6 @@ export default function Checkout() {
           </Stepper>
           {activeStep === steps.length ? (
             <React.Fragment>
-              {submitForm()}
               <Typography variant="h5" gutterBottom>
                 You have successfully submitted the Form.
               </Typography>

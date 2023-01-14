@@ -28,22 +28,22 @@ const formdata = (sequelize) => {
         type: Sequelize.STRING
       },
       n_gpu: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       gpu_memory: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       n_cpu: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       n_cuda_cores: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       n_tensor_cores: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       system_memory: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       os: {
         type: Sequelize.STRING
@@ -61,10 +61,10 @@ const formdata = (sequelize) => {
         type: Sequelize.STRING
       },
       from_date: {
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       to_date: {
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       is_approved: {
         type: Sequelize.BOOLEAN

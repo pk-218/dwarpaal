@@ -18,7 +18,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.ORIGIN,
+    origin: "*",
     credentials: true,
   })
 );
@@ -44,8 +44,9 @@ app.use(session(sessionConfig));
 app.use("/home", homeRouter)
 app.use("/api/user", usersRouter);
 app.use("/api/credentials", credentialsRouter);
-app.use("/api/admin", adminRouter)
-
+app.use("/api/admin", adminRouter);
+app.use("/request-form", formRouter)
+    
 // if encounter with the path that is not known, unknow paths responding with 404 status code
 app.use("*", (req, res) => {
   res.status(404).json({
