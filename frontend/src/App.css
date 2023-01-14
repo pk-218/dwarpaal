@@ -38,7 +38,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -54,4 +54,10 @@ input[type=number] {
 
 .header-brand:hover {
   color: white;
+}
+
+.title {
+  color: #284b63;
+  font-size: 2rem;
+  font-weight: bolder;
 }
