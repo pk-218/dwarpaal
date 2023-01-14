@@ -29,7 +29,7 @@ const Dashboard = () => {
                     alignItems="center"
                     justifyContent="center"
                 >
-                    <Link to='/dashboard/grid' style={{ margin: 0 }}>
+                    <Link to='/user-info' style={{ margin: 0 }}>
                         <StatBox
                             title="15"
                             subtitle="Users in System"
@@ -67,7 +67,7 @@ const Dashboard = () => {
                 >
                     <StatBox
                         title="15 GB"
-                        subtitle="Memory is Use"
+                        subtitle="Memory in Use"
                         icon={
                             <StorageIcon
                                 sx={{ color: 'white', fontSize: "36px" }}

@@ -7,8 +7,8 @@ import Grid from '@mui/material/Grid';
 
 const products = [
   {
-    name: 'Product 1',
-    desc: 'A nice thing',
+    name: 'First Name',
+    value: 'A nice thing',
     price: '$9.99',
   },
   {
@@ -38,6 +38,12 @@ const payments = [
 ];
 
 export default function Review({ formData, setFormData }) {
+  const fields = []
+  for (var key in formData) {
+    fields.push(formData[key])
+  }
+  console.log(fields)
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -58,6 +64,8 @@ export default function Review({ formData, setFormData }) {
           </Typography>
         </ListItem>
       </List>
+
+
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
