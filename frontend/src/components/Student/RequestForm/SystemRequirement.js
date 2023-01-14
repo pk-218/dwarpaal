@@ -2,6 +2,17 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+import { styled } from "@mui/material/styles";
+
+const FormTextfield = styled(TextField)({
+  '& .MuiOutlinedInput-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: "#284b63",
+      borderWidth: "2px",
+    },
+  },
+});
+
 
 export default function PaymentForm({ formData, setFormData }) {
   return (
@@ -11,10 +22,13 @@ export default function PaymentForm({ formData, setFormData }) {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <TextField
+          <FormTextfield
             required
             id="reqGPU"
             label="No of GPU Required"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="cc-name"
             variant="outlined"
@@ -28,11 +42,13 @@ export default function PaymentForm({ formData, setFormData }) {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
-
+          <FormTextfield
             required
             id="reqGPUMem"
             label="GPU Memory Required"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="cc-name"
             variant="outlined"
@@ -46,10 +62,13 @@ export default function PaymentForm({ formData, setFormData }) {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
+          <FormTextfield
             required
             id="reqCPU"
             label="No of CPUs Required"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="cc-name"
             variant="outlined"
@@ -63,10 +82,13 @@ export default function PaymentForm({ formData, setFormData }) {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
+          <FormTextfield
             required
             id="reqCUDACores"
             label="No of  CUDA cores Required"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="cc-name"
             variant="outlined"
@@ -80,10 +102,13 @@ export default function PaymentForm({ formData, setFormData }) {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
+          <FormTextfield
             required
             id="reqTensorCores"
             label="No of Tensor Cores"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="cc-name"
             variant="outlined"
@@ -97,10 +122,13 @@ export default function PaymentForm({ formData, setFormData }) {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
+          <FormTextfield
             required
             id="reqSysMem"
             label="System Memory Required"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="cc-name"
             variant="outlined"
@@ -115,10 +143,13 @@ export default function PaymentForm({ formData, setFormData }) {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <TextField
+          <FormTextfield
             required
             id="reqOS"
             label="Operating System Required"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="cc-name"
             variant="outlined"
@@ -133,10 +164,13 @@ export default function PaymentForm({ formData, setFormData }) {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <TextField
+          <FormTextfield
             required
             id="OSVersion"
             label="Version No of Operating System"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="cc-name"
             variant="outlined"
@@ -150,13 +184,14 @@ export default function PaymentForm({ formData, setFormData }) {
           />
         </Grid>
 
-
-
         <Grid item xs={12} md={6}>
-          <TextField
+          <FormTextfield
             required
             id="ContainerVersions"
             label="Containers Required"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="cc-name"
             variant="outlined"
@@ -171,10 +206,13 @@ export default function PaymentForm({ formData, setFormData }) {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <TextField
+          <FormTextfield
             required
             id="reqContainers"
             label="Version No of Container"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="cc-name"
             variant="outlined"
@@ -189,10 +227,13 @@ export default function PaymentForm({ formData, setFormData }) {
         </Grid>
 
         <Grid item xs={12} md={12}>
-          <TextField
+          <FormTextfield
             required
             id="DGXDrivers"
             label="DGX drivers required to install software"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="cc-name"
             variant="outlined"

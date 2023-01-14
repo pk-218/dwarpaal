@@ -3,6 +3,16 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import { styled } from "@mui/material/styles";
+
+const FormTextfield = styled(TextField)({
+  '& .MuiOutlinedInput-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: "#284b63",
+      borderWidth: "2px",
+    },
+  },
+});
 
 export default function PersonalDetail({ formData, setFormData }) {
   const [fromDate, setFromDate] = useState();
@@ -15,11 +25,14 @@ export default function PersonalDetail({ formData, setFormData }) {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <FormTextfield
             required
             id="firstName"
             name="firstName"
             label="First name"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="given-name"
             variant="outlined"
@@ -33,11 +46,14 @@ export default function PersonalDetail({ formData, setFormData }) {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <FormTextfield
             required
             id="lastName"
             name="lastName"
             label="Last name"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="family-name"
             variant="outlined"
@@ -51,11 +67,14 @@ export default function PersonalDetail({ formData, setFormData }) {
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <FormTextfield
             required
             id="yearOfStudy"
             name="year"
             label="Year of Study"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="Year of Study"
             variant="outlined"
@@ -69,11 +88,14 @@ export default function PersonalDetail({ formData, setFormData }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextfield
             required
             id="projectTitle"
             name="projectTitle"
             label="Project Title"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="shipping address-line2"
             variant="outlined"
@@ -88,11 +110,14 @@ export default function PersonalDetail({ formData, setFormData }) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextfield
             required
             id="profInCharge"
             name="profInCharge"
             label="Professor In Charge"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete="shipping address-line2"
             variant="outlined"
@@ -107,11 +132,14 @@ export default function PersonalDetail({ formData, setFormData }) {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <TextField
+          <FormTextfield
             required
             id="fromdate"
             name="fromdate"
             label="From Date"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete=""
             variant="outlined"
@@ -125,11 +153,14 @@ export default function PersonalDetail({ formData, setFormData }) {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <FormTextfield
             required
             id="todate"
             name="todate"
             label="To Date"
+            InputLabelProps={{
+              style: { color: '#284b63' },
+            }}
             fullWidth
             autoComplete=""
             variant="outlined"

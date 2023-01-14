@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button, Switch } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 // import { tokens } from "../../theme";
 import { useTheme } from "@mui/material";
@@ -13,8 +13,19 @@ const UserInfoGrid = () => {
         { field: "registrarId", headerName: "Registration ID", flex: 0.2 },
         { field: "username", headerName: "Username", flex: 0.3 },
         { field: "validity", headerName: "Valid Until", type: "date", flex: 0.2 },
-        { field: "access", headerName: "Accessibility", type: "text", flex: 0.2 },
+        {
+            field: "revoke", headerName: "Revoke?", type: "text", flex: 0.2,
+            sortable: false,
+            renderCell: ({ row }) =>
+                <Switch onChange={yourActionFunction(row)} /> // we can take the row data and pass it on if needed for revoking access of the user
+        },
     ];
+
+    const yourActionFunction = (row) => {
+        console.log("Button is functioning")
+        // console.log(row)
+        // revoke function to be called
+    }
 
     return (
         <Box m="20px">
@@ -40,9 +51,6 @@ const UserInfoGrid = () => {
                         borderTop: "none",
                         backgroundColor: "aliceblue",
                     },
-                    // "& .MuiCheckbox-root": {
-                    //     color: "#fdde6c !important", // tertiary yellow color,
-                    // },
                     "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
                         color: "red !important",
                     },
