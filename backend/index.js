@@ -10,7 +10,7 @@ import cors from "cors";
 
 import authRouter from "./routes/auth.js";
 import homeRouter from "./routes/home.js";
-import formRouter from "./routes/form.js"
+import formRouter from "./routes/form.js";
 dotenv.config();
 
 // creating express app
@@ -41,12 +41,14 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 
 // seting up routers
-app.use("/home", homeRouter)
+app.use("/home", homeRouter);
 app.use("/api/user", usersRouter);
 app.use("/api/credentials", credentialsRouter);
 app.use("/api/admin", adminRouter);
 app.use("/request-form", formRouter)
     
+app.use("/api/auth", authRouter);
+
 // if encounter with the path that is not known, unknow paths responding with 404 status code
 app.use("*", (req, res) => {
   res.status(404).json({
@@ -59,7 +61,7 @@ app.use("*", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 initPostgresDB();
 
 app.listen(PORT, (_) => {
