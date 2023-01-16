@@ -1,10 +1,8 @@
 import Sequelize from "sequelize";
 import user from "../models/user.js";
-import formdata from "../models/formdata.js"
+import formdata from "../models/formdata.js";
 
-const conn = new Sequelize(
-  "postgresql://postgres:JiHtxSMCthlvaPu89qKW@containers-us-west-122.railway.app:5605/railway"
-);
+const conn = new Sequelize(process.env.POSTGRES_DSN);
 
 const db = {};
 
@@ -16,6 +14,7 @@ db.form = formdata(conn);
 
 db.ROLES = ["student", "faculty", "admin"];
 
+// add dummy user
 const initPostgresDB = () => {
   db.conn.sync({ force: true }).then(() => {
     console.log("Drop and Resync Database with { force: true }");

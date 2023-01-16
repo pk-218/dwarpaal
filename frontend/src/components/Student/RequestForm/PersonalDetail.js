@@ -6,8 +6,8 @@ import { useState } from "react";
 import { styled } from "@mui/material/styles";
 
 const FormTextfield = styled(TextField)({
-  '& .MuiOutlinedInput-root': {
-    '&.Mui-focused fieldset': {
+  "& .MuiOutlinedInput-root": {
+    "&.Mui-focused fieldset": {
       borderColor: "#284b63",
       borderWidth: "2px",
     },
@@ -31,7 +31,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             name="firstName"
             label="First name"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="given-name"
@@ -52,7 +52,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             name="lastName"
             label="Last name"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="family-name"
@@ -73,7 +73,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             name="year"
             label="Year of Study"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="Year of Study"
@@ -94,7 +94,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             name="projectTitle"
             label="Project Title"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="shipping address-line2"
@@ -106,7 +106,6 @@ export default function PersonalDetail({ formData, setFormData }) {
               });
             }}
             value={formData.projectTitle}
-
           />
         </Grid>
         <Grid item xs={6}>
@@ -116,7 +115,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             name="profInCharge"
             label="Professor In Charge"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="shipping address-line2"
@@ -138,7 +137,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             name="fromdate"
             label="From Date"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete=""
@@ -159,7 +158,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             name="todate"
             label="To Date"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete=""
@@ -173,8 +172,6 @@ export default function PersonalDetail({ formData, setFormData }) {
             value={formData.todate}
           />
         </Grid>
-
-
       </Grid>
     </React.Fragment>
   );

@@ -2,6 +2,7 @@ import Speakeasy from "speakeasy";
 import QR from "qr-image";
 import { db } from "../utils/sqlConfig.js";
 import nodemailer from "nodemailer";
+
 const User = db.user;
 
 const generateAPIKey = (req, res, next) => {
@@ -118,7 +119,7 @@ const sendCode = (req, res) => {
     auth: {
       // type: 'OAuth2',
       user: "dwarpal-vjti@outlook.com",
-      pass: "DWARPAL@12345",
+      pass: process.env.MAILER_PASSWORD,
     },
     tls: {
       ciphers: "SSLv3",
