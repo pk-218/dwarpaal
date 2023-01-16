@@ -1,10 +1,6 @@
 import { Box, Button, Switch } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-// import { tokens } from "../../theme";
-
-import { useTheme } from "@mui/material";
 import { mockDataContacts } from "../data/mockData";
-import { useState } from "react";
 import axios from "axios";
 
 
@@ -36,27 +32,27 @@ const UserInfoGrid = () => {
     // const theme = useTheme();
     // const colors = tokens(theme.palette.mode);
 
-    const [hasAccess, setHasAccess] = useState(false);
-
 
     const columns = [
         { field: "id", headerName: "ID" },
         { field: "registrarId", headerName: "Registration ID", flex: 0.2 },
         { field: "username", headerName: "Username", flex: 0.3 },
         { field: "validity", headerName: "Valid Until", type: "date", flex: 0.2 },
-        // { field: "access", headerName: "Accessibility", type: "boolean", renderCell :renderDetailsButton ,flex: 0.2 },
         {
-            field: "revoke", headerName: "Revoke?", type: "text", flex: 0.2,
-            sortable: false,
-            renderCell: ({ row }) =>
-                <Switch onChange={yourActionFunction(row)} /> // we can take the row data and pass it on if needed for revoking access of the user
+            field: "Accessibility", headerName: "Accessibility", type: "boolean", flex: 0.2,
+            renderCell: (params) =>
+                <Switch onChange={yourActionFunction(params)} checked={params.value }  /> // we can take the row data and pass it on if needed for revoking access of the user
         },
     ];
 
-    const yourActionFunction = (row) => {
-        console.log("Button is functioning")
+    const yourActionFunction = (params) => {
+        console.log("Button is functioning",params.value)
+        // console.log(params.getValue(params.id, 'id') || '', params.value),
+        // params.value== true ? params.value =false : params.value=true
+        
         // console.log(row)
         // revoke function to be called
+        
     }
 
     return (

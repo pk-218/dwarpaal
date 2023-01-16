@@ -105,7 +105,7 @@ const Dashboard = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <Link to="/dashboard/grid" style={{ margin: 0 }}>
+            <Link to="/user-info" style={{ margin: 0 }}>
               <StatBox
                 title={`${allUsers.length}`}
                 subtitle="Created Users"
