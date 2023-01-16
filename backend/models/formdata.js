@@ -70,6 +70,21 @@ const formdata = (sequelize) => {
       type: Sequelize.BOOLEAN,
       defaultValue: false
     },
+    faculty_approved: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+    },
+    faculty_reject: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+    },
+    faculty_token: {
+      type: Sequelize.STRING
+    },
+    faculty_email: {
+      type: Sequelize.STRING,
+      defaultValue: false
+    },
   });
 
   return Form;

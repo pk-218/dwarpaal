@@ -1,5 +1,5 @@
 import { NodeSSH } from "node-ssh";
-import generatePassword from "../utils/createPassword.js";
+import { generatePassword } from "../utils/createPassword.js";
 import { db } from "../utils/sqlConfig.js";
 const ssh = new NodeSSH();
 
