@@ -46,6 +46,7 @@ app.use("/api/user", usersRouter);
 app.use("/api/credentials", credentialsRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/forms",formRouter);
 
 // if encounter with the path that is not known, unknow paths responding with 404 status code
 app.use("*", (req, res) => {

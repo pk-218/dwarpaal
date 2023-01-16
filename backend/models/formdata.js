@@ -68,6 +68,7 @@ const formdata = (sequelize) => {
     },
     is_approved: {
       type: Sequelize.BOOLEAN,
+      defaultValue: false
     },
   });
 
