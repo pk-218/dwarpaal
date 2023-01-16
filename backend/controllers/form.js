@@ -3,9 +3,10 @@ const Form = db.form;
 
 const submitForm = async (req, res) => {
     //to refactor this to controller
+    console.log("Res",req.session.user);
         Form.create({
             id: req.session.user.id ,
-            
+
             email: req.session.user.email,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -34,4 +35,12 @@ const submitForm = async (req, res) => {
         })
 }
 
-export { submitForm }
+const getForms = (req,res)=>{
+    Form.findAll().then((Forms)=>{
+        res.status(200).send({Forms})
+    }).catch((err)=>{
+        res.send(err);
+    })
+};
+
+export { submitForm , getForms }

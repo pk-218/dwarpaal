@@ -1,19 +1,51 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 // import { tokens } from "../../theme";
+
 import { useTheme } from "@mui/material";
 import { mockDataContacts } from "../data/mockData";
+import { useState } from "react";
+import Switch from '@mui/material/Switch';
+import axios from "axios";
+
+
+axios.post("http://localhost:8000/request-form/getForm" )
+.then(res => {
+    console.log("Res Data :",res.data);
+})
+
+
+const renderDetailsButton = (params) => {
+
+    return (
+        <strong>
+            <Switch
+                variant="contained"
+                color={params.hasAccess ? "error" : "success" }
+                size="small"
+                onClick={() => {
+                    console.log("Heifja")
+                }}
+            >
+                Revoke Access
+            </Switch>
+        </strong>
+    )
+}
 
 const UserInfoGrid = () => {
     // const theme = useTheme();
     // const colors = tokens(theme.palette.mode);
+
+    const [hasAccess, setHasAccess] = useState(false);
+
 
     const columns = [
         { field: "id", headerName: "ID" },
         { field: "registrarId", headerName: "Registration ID", flex: 0.2 },
         { field: "username", headerName: "Username", flex: 0.3 },
         { field: "validity", headerName: "Valid Until", type: "date", flex: 0.2 },
-        { field: "access", headerName: "Accessibility", type: "text", flex: 0.2 },
+        { field: "access", headerName: "Accessibility", type: "boolean", renderCell :renderDetailsButton ,flex: 0.2 },
     ];
 
     return (
@@ -59,3 +91,4 @@ const UserInfoGrid = () => {
 };
 
 export default UserInfoGrid;
+
