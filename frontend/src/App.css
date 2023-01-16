@@ -38,11 +38,12 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
 .header-branding {
+
   padding: 11px;
   background-color: #284b63;
   color: white;
@@ -50,8 +51,29 @@ input[type=number] {
 
 .header-brand {
   color: white;
+  font-size: x-large;
 }
 
 .header-brand:hover {
   color: white;
 }
+
+.title {
+  color: #284b63;
+  font-size: 2rem;
+  font-weight: bolder;
+}
+.navbar-link {
+  font-size: large;
+  color: white;
+}
+
+.navbar-link:hover {
+  font-size: large;
+  color: aliceblue;
+}
+
+/* .navbar-link:active {
+  font-size: large;
+  color: aliceblue;
+} */

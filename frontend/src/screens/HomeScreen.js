@@ -1,11 +1,19 @@
 import React from 'react'
 import './HomeScreen.css'
 import { Link } from 'react-router-dom'
+import Typewriter from 'typewriter-effect';
 
 const HomeScreen = () => {
     return (
         <>
-            <h1 className='py-3'>Welcome to Dwarpaal</h1>
+            <h1><Typewriter
+                options={{
+                    strings: ['Welcome to Dwarpal'],
+                    autoStart: true,
+                    loop: true,
+                }}
+            />
+            </h1>
 
             <div className='btn-main-container'>
                 <div className='btn-container'>
