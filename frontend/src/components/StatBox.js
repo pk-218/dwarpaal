@@ -6,7 +6,7 @@ const StatBox = ({ title, subtitle, icon }) => {
     // const colors = tokens(theme.palette.mode);
 
     return (
-        <Box width="100%" m="0 30px">
+        <Box width="100%" m="0">
             <Box display="flex" justifyContent="center">
                 {icon}
                 <Box>
