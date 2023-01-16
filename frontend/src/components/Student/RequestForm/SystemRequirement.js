@@ -1,18 +1,17 @@
-import * as React from 'react';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
+import * as React from "react";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 
 const FormTextfield = styled(TextField)({
-  '& .MuiOutlinedInput-root': {
-    '&.Mui-focused fieldset': {
+  "& .MuiOutlinedInput-root": {
+    "&.Mui-focused fieldset": {
       borderColor: "#284b63",
       borderWidth: "2px",
     },
   },
 });
-
 
 export default function PaymentForm({ formData, setFormData }) {
   return (
@@ -27,7 +26,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="reqGPU"
             label="No of GPU Required"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="cc-name"
@@ -47,7 +46,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="reqGPUMem"
             label="GPU Memory Required"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="cc-name"
@@ -67,7 +66,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="reqCPU"
             label="No of CPUs Required"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="cc-name"
@@ -87,7 +86,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="reqCUDACores"
             label="No of  CUDA cores Required"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="cc-name"
@@ -107,7 +106,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="reqTensorCores"
             label="No of Tensor Cores"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="cc-name"
@@ -127,7 +126,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="reqSysMem"
             label="System Memory Required"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="cc-name"
@@ -148,7 +147,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="reqOS"
             label="Operating System Required"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="cc-name"
@@ -169,7 +168,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="OSVersion"
             label="Version No of Operating System"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="cc-name"
@@ -190,7 +189,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="ContainerVersions"
             label="Containers Required"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="cc-name"
@@ -211,7 +210,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="reqContainers"
             label="Version No of Container"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="cc-name"
@@ -232,7 +231,7 @@ export default function PaymentForm({ formData, setFormData }) {
             id="DGXDrivers"
             label="DGX drivers required to install software"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="cc-name"
