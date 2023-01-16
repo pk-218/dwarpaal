@@ -1,13 +1,12 @@
 import { NodeSSH } from "node-ssh";
-import { VM_IP, VM_USER, VM_PASSWORD } from "../env.js";
 import generatePassword from "../utils/createPassword.js";
 import { db } from "../utils/sqlConfig.js";
 const ssh = new NodeSSH();
 
 const VM_CONFIG = {
-  host: VM_IP,
-  username: VM_USER,
-  password: VM_PASSWORD,
+  host: process.env.VM_IP,
+  username: process.env.VM_USER,
+  password: process.env.VM_PASSWORD,
 };
 
 const memory_usage_per_user =

@@ -1,9 +1,8 @@
 import Sequelize from "sequelize";
 import user from "../models/user.js";
 import formdata from "../models/formdata.js";
-import { POSTGRES_DSN } from "../env.js";
 
-const conn = new Sequelize(process.env.POSTGRES_DSN || POSTGRES_DSN);
+const conn = new Sequelize(process.env.POSTGRES_DSN);
 
 const db = {};
 
