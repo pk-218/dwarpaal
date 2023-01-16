@@ -14,6 +14,7 @@ import PersonalDetail from "../components/Student/RequestForm/PersonalDetail";
 import PaymentForm from "../components/Student/RequestForm/SystemRequirement";
 import Review from "../components/Student/RequestForm/Review";
 import { useState } from "react";
+import axios from "axios";
 
 function Copyright() {
   return (
@@ -92,6 +93,15 @@ export default function Checkout() {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    if(activeStep === steps.length - 1 ){
+      console.log("Form data",formData);
+      axios.post("/forms/submitform",formData)
+      .then(res=>{
+        console.log("form submitted data - ",res.data)
+      })
+      .catch(err=>console.log("Error in saving form",err));
+    }
+
   };
 
   const handleBack = () => {

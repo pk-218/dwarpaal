@@ -23,6 +23,7 @@ export default function PaymentForm({ formData, setFormData }) {
         <Grid item xs={12} md={6}>
           <FormTextfield
             required
+            type="number"
             id="reqGPU"
             label="No of GPU Required"
             InputLabelProps={{
@@ -43,6 +44,7 @@ export default function PaymentForm({ formData, setFormData }) {
         <Grid item xs={12} md={6}>
           <FormTextfield
             required
+            type="number"
             id="reqGPUMem"
             label="GPU Memory Required"
             InputLabelProps={{
@@ -64,6 +66,7 @@ export default function PaymentForm({ formData, setFormData }) {
           <FormTextfield
             required
             id="reqCPU"
+            type="number"
             label="No of CPUs Required"
             InputLabelProps={{
               style: { color: "#284b63" },
@@ -83,6 +86,7 @@ export default function PaymentForm({ formData, setFormData }) {
         <Grid item xs={12} md={6}>
           <FormTextfield
             required
+            type="number"
             id="reqCUDACores"
             label="No of  CUDA cores Required"
             InputLabelProps={{
@@ -94,15 +98,16 @@ export default function PaymentForm({ formData, setFormData }) {
             onChange={(e) => {
               setFormData({
                 ...formData,
-                reqCPU: e.target.value,
+                reqCudaCores: e.target.value,
               });
             }}
-            value={formData.reqCPU}
+            value={formData.reqCudaCores}
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <FormTextfield
             required
+            type="number"
             id="reqTensorCores"
             label="No of Tensor Cores"
             InputLabelProps={{
@@ -123,6 +128,7 @@ export default function PaymentForm({ formData, setFormData }) {
         <Grid item xs={12} md={6}>
           <FormTextfield
             required
+            type="number"
             id="reqSysMem"
             label="System Memory Required"
             InputLabelProps={{
