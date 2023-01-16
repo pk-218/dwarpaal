@@ -5,7 +5,6 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useTheme } from "@mui/material";
 import { mockDataContacts } from "../data/mockData";
 import { useState } from "react";
-import Switch from '@mui/material/Switch';
 import axios from "axios";
 
 

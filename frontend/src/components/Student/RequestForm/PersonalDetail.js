@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+
 
 const FormTextfield = styled(TextField)({
   '& .MuiOutlinedInput-root': {
@@ -67,25 +69,33 @@ export default function PersonalDetail({ formData, setFormData }) {
           />
         </Grid>
         <Grid item xs={12}>
-          <FormTextfield
-            required
-            id="yearOfStudy"
-            name="year"
-            label="Year of Study"
-            InputLabelProps={{
-              style: { color: '#284b63' },
-            }}
-            fullWidth
-            autoComplete="Year of Study"
-            variant="outlined"
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                yearOfStudy: e.target.value,
-              });
-            }}
-            value={formData.yearOfStudy}
-          />
+        <FormControl fullWidth>
+        <InputLabel id="yearOfStudylabel">Year of Study</InputLabel>
+        <Select
+          labelId="yearOfStudylabel"
+          id="yearOfStudy"
+          value={formData.yearOfStudy}
+          autoComplete="Year of Study"
+          label="yearOfStudy"
+          onChange={(e) => {
+            setFormData({
+              ...formData,
+              yearOfStudy: e.target.value,
+            });
+          }}
+        >
+          <MenuItem value={"BTech First Year"} >BTech First Year</MenuItem>
+          <MenuItem value={"BTech Second Year"} >BTech Second Year</MenuItem>
+          <MenuItem value={"BTech Third Year"} >BTech Third Year</MenuItem>
+          <MenuItem value={"BTech Final Year"} >BTech Final Year</MenuItem>
+          <MenuItem value={"MTech First Year"} >MTech First Year</MenuItem>
+          <MenuItem value={"MTech Second Year"} >MTech Second Year</MenuItem>
+          <MenuItem value={"MCA First Year"} >MCA First Year</MenuItem>
+          <MenuItem value={"MCA Second Year"} >MCA Second Year</MenuItem>
+          <MenuItem value={"PHD"} >PHD</MenuItem>
+          
+        </Select>
+      </FormControl>
         </Grid>
         <Grid item xs={6}>
           <FormTextfield
@@ -97,7 +107,7 @@ export default function PersonalDetail({ formData, setFormData }) {
               style: { color: '#284b63' },
             }}
             fullWidth
-            autoComplete="shipping address-line2"
+            autoComplete="Project Title"
             variant="outlined"
             onChange={(e) => {
               setFormData({
@@ -119,7 +129,7 @@ export default function PersonalDetail({ formData, setFormData }) {
               style: { color: '#284b63' },
             }}
             fullWidth
-            autoComplete="shipping address-line2"
+            autoComplete="Prof Incharge"
             variant="outlined"
             onChange={(e) => {
               setFormData({
@@ -141,7 +151,7 @@ export default function PersonalDetail({ formData, setFormData }) {
               style: { color: '#284b63' },
             }}
             fullWidth
-            autoComplete=""
+            autoComplete="From Date"
             variant="outlined"
             onChange={(e) => {
               setFormData({
@@ -151,6 +161,8 @@ export default function PersonalDetail({ formData, setFormData }) {
             }}
             value={formData.fromdate}
           />
+          
+
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormTextfield
@@ -162,7 +174,7 @@ export default function PersonalDetail({ formData, setFormData }) {
               style: { color: '#284b63' },
             }}
             fullWidth
-            autoComplete=""
+            autoComplete="To Date"
             variant="outlined"
             onChange={(e) => {
               setFormData({
