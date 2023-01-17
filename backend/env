@@ -1,5 +1,0 @@
-POSTGRES_DSN =postgresql://postgres:JiHtxSMCthlvaPu89qKW@containers-us-west-122.railway.app:5605/railway
-VM_IP=170.187.251.66
-VM_USER=root
-VM_PASSWORD=navnavtihi++
-MAILER_PASSWORD=DWARPAL@12345
