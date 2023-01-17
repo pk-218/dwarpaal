@@ -6,7 +6,7 @@ const Form = db.form;
 const submitForm = async (req, res) => {
     // temporarily using this
     req.session.user = {
-        id: "191080047",
+        id: "191080048",
         email:"loggedstudent@mail.vjti.in"
     }
     req.body.reqGPU = parseInt(req.body.reqGPU);
@@ -22,6 +22,7 @@ const submitForm = async (req, res) => {
     console.log("REcieved ", req.body);
 
     const token = generateToken();
+    console.log("Token",token);
 
     const form = await Form.create({
         id: req.session.user.id ,
@@ -47,11 +48,11 @@ const submitForm = async (req, res) => {
         faculty_pending_status: true,
         faculty_status: false,
         faculty_email: req.body.faculty_email,
-        fauculty_token: token
+        faculty_token: token
 
     }).then((fm)=>{
         console.log("Saved form",fm.dataValues);
-        sendFacultyMail(faculty_email, {
+        sendFacultyMail(fm.dataValues.faculty_email, {
             id:fm.dataValues.id, 
             email:fm.dataValues.email, 
             firstName:fm.dataValues, 
@@ -70,4 +71,15 @@ const submitForm = async (req, res) => {
     });
 }
 
-export { submitForm };
+const getForms = (req, res) =>{
+    // var {email,id} = req.body;
+    Form.findAll().then((forms)=>{
+        console.log(forms);
+        res.send({forms});
+    }).catch((err)=>{
+        console.log(err);
+        res.status(500).send({err});
+    })
+};
+
+export { submitForm, getForms };
