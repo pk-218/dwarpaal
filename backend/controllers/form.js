@@ -44,8 +44,8 @@ const submitForm = async (req, res) => {
         from_date: req.body.fromdate,
         to_date: req.body.todate,
         is_approved: false,
-        faculty_approved: false,
-        faculty_reject: false,
+        faculty_pending_status: true,
+        faculty_status: false,
         faculty_email: req.body.faculty_email,
         fauculty_token: token
 
@@ -63,7 +63,7 @@ const submitForm = async (req, res) => {
             }
         });
 
-        res.status(200).send({sucess:true, message:"Successfully saved form"});
+        res.status(200).send({success:true, message:"Successfully saved form"});
     }).catch((err)=>{
         console.log("Error while saving fomr",err);
         res.status(500).send({message:"Some error occured while storing the form"});

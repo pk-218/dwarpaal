@@ -10,10 +10,10 @@ const findOneUser = (req, res)=>{
         }
     }).then((user)=>{
         if(!user){
-            res.status(404).send({sucess:false,message:"User not found!"});
+            res.status(404).send({success:false,message:"User not found!"});
         }
         else{
-            res.status(200).send({sucess:true,user});
+            res.status(200).send({success:true,user});
         }
     });
 }
