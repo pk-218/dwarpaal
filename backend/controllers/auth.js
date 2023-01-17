@@ -86,6 +86,7 @@ const validateToken = (req, res) => {
             id: user.id,
             email: user.email,
           };
+          console.log("session user",req.session.user);
           res.json({ isLoggedIn: true, message: "Login successful" });
         }
       }

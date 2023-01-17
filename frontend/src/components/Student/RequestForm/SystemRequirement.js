@@ -30,6 +30,7 @@ export default function PaymentForm({ formData, setFormData }) {
               style: { color: "#284b63" },
             }}
             fullWidth
+            type="number"
             autoComplete="cc-name"
             variant="outlined"
             onChange={(e) => {
@@ -72,6 +73,7 @@ export default function PaymentForm({ formData, setFormData }) {
               style: { color: "#284b63" },
             }}
             fullWidth
+            type="number"
             autoComplete="cc-name"
             variant="outlined"
             onChange={(e) => {
@@ -93,6 +95,7 @@ export default function PaymentForm({ formData, setFormData }) {
               style: { color: "#284b63" },
             }}
             fullWidth
+            type="number"
             autoComplete="cc-name"
             variant="outlined"
             onChange={(e) => {
@@ -115,6 +118,7 @@ export default function PaymentForm({ formData, setFormData }) {
             }}
             fullWidth
             autoComplete="cc-name"
+            type="number"
             variant="outlined"
             onChange={(e) => {
               setFormData({
@@ -136,6 +140,7 @@ export default function PaymentForm({ formData, setFormData }) {
             }}
             fullWidth
             autoComplete="cc-name"
+            type="number"
             variant="outlined"
             onChange={(e) => {
               setFormData({

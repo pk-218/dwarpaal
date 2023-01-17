@@ -62,6 +62,9 @@ const StudentLoginForm = () => {
       email: userData.email,
       id: userData.id,
       code: totp,
+    }).then(res=>{
+      console.log('clientId',res.data.clientId);
+      localStorage.setItem('clientId',res.data.clientId);
     });
     navigate("/request-form");
     console.log("redirect called");

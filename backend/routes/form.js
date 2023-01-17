@@ -3,7 +3,10 @@ import { submitForm, getForms } from "../controllers/form.js"
 const formRouter = Router();
 
 // ??
-const isLoggedIn = (req, res) => {
+const isLoggedIn = (req, res,nextrs) => {
+    
+    //to refactor this to controller
+    console.log("Res",req.session.user);
     return req.session.user.id != null
 }
 
