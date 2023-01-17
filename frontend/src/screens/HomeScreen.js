@@ -2,13 +2,14 @@ import React from 'react'
 import './HomeScreen.css'
 import { Link } from 'react-router-dom'
 import Typewriter from 'typewriter-effect';
+import Copyright from '../components/Copyright';
 
 const HomeScreen = () => {
     return (
         <>
             <h1><Typewriter
                 options={{
-                    strings: ['Welcome to Dwarpal'],
+                    strings: ['Welcome to Dwarpaal', 'The gateway to DGX'],
                     autoStart: true,
                     loop: true,
                 }}
@@ -26,6 +27,8 @@ const HomeScreen = () => {
                     <Link to='/request-form' className='btn btn-lg btn-custom'>Request Form</Link>
                 </div>
             </div>
+
+            <Copyright />
         </>
     )
 }

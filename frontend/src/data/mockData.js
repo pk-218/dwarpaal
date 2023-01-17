@@ -18,8 +18,8 @@ export const mockTransactions = [
     cost: "Grant",
   },
   {
-    txId: "panima_b19",
-    user: "221040040",
+    txId: "221040040",
+    user: "panima_b19",
     date: "2023-01-14",
     cost: "Grant",
   },

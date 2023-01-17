@@ -9,25 +9,13 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import PersonalDetail from "../components/Student/RequestForm/PersonalDetail";
 import PaymentForm from "../components/Student/RequestForm/SystemRequirement";
 import Review from "../components/Student/RequestForm/Review";
+import Copyright from "../components/Copyright"
 import { useState } from "react";
 import axios from "axios";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Dwarpal
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const steps = ["Project Details", "System Requirements", "Form Confirmation"];
 
@@ -63,8 +51,6 @@ export default function Checkout() {
     containerVersions: "",
   });
 
-  const [formSubmitted, setFormSubmitted] = useState(false)
-
   function getStepContent(step) {
     switch (step) {
       case 0:
@@ -78,23 +64,9 @@ export default function Checkout() {
     }
   }
 
-  // const formSubmission = () => {
-  //   setFormSubmitted(true)
-  //   return (
-  //     <React.Fragment>
-  //       <Typography variant="h5" gutterBottom>
-  //         Your access form has been submitted.
-  //       </Typography>
-  //       <Typography variant="subtitle1">
-  //         You will receive your credentials within 3-5 working days. Do check the notifications for an early announcement.
-  //       </Typography>
-  //     </React.Fragment>
-  //   )
-  // }
-
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    if (activeStep == steps.length -1) {
+    if (activeStep == steps.length - 1) {
       console.log("form submitted successfully ! ");
       // axios.interceptors.request.use(config=>{
       //   const clientId = localStorage.getItem('clientId');
@@ -102,7 +74,7 @@ export default function Checkout() {
       //   config.headers['client-id'] = clientId;
       //   return config;
       // })
-      axios.post("http://localhost:8000/request-form/",formData );
+      axios.post("http://localhost:8000/request-form/", formData);
     }
   };
 
@@ -118,7 +90,7 @@ export default function Checkout() {
           variant="outlined"
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
         >
-          <Typography component="h1" variant="h4" align="center">
+          <Typography variant="h3" className="py-3" align="center">
             DGX Application
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
@@ -181,6 +153,7 @@ export default function Checkout() {
             </React.Fragment>
           )}
         </Paper>
+
         <Copyright />
       </Container>
     </ >
