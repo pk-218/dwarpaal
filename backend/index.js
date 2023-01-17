@@ -10,6 +10,7 @@ import adminRouter from "./routes/admin.js";
 import authRouter from "./routes/auth.js";
 import homeRouter from "./routes/home.js";
 import formRouter from "./routes/form.js";
+import facultyRouter from "./routes/faculty.js";
 
 import { initPostgresDB } from "./utils/sqlConfig.js";
 
@@ -49,6 +50,7 @@ app.use("/request-form", formRouter)
     
 app.use("/api/auth", authRouter);
 app.use("/api/forms",formRouter);
+app.use("/api/faculty",facultyRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({

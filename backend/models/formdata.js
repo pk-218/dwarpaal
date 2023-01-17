@@ -66,8 +66,23 @@ const formdata = (sequelize) => {
     to_date: {
       type: Sequelize.DATE,
     },
-    is_approved: {
+    is_approved: { // this is admin status
       type: Sequelize.BOOLEAN,
+      defaultValue: false
+    },
+    faculty_pending_status: {
+      type: Sequelize.BOOLEAN, // true - faculty hasn't reviewed the application
+      defaultValue: true       // false - faculty has reviewed the application
+    },
+    faculty_status: {
+      type: Sequelize.BOOLEAN, // true - accepted, false - rejected
+      defaultValue: false
+    },
+    faculty_token: {
+      type: Sequelize.STRING
+    },
+    faculty_email: {
+      type: Sequelize.STRING,
       defaultValue: false
     },
   });

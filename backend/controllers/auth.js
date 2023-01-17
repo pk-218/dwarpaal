@@ -1,7 +1,7 @@
 import Speakeasy from "speakeasy";
 import QR from "qr-image";
 import { db } from "../utils/sqlConfig.js";
-import nodemailer from "nodemailer";
+import { sendOTPMail } from "../utils/mailSender.js";
 
 const User = db.user;
 
@@ -111,40 +111,17 @@ const sendCode = (req, res) => {
   console.log(email, id);
   var verificationCode = Math.floor(Math.random() * 1000000);
   console.log("Verification code:", verificationCode);
-
-  // send email with verification code
-  const transporter = nodemailer.createTransport({
-    host: "smtp-mail.outlook.com", // hostname
-    secureConnection: false, // use SSL
-    port: 587, // port for secure SMTP
-    auth: {
-      // type: 'OAuth2',
-      user: "dwarpal-vjti@outlook.com",
-      pass: process.env.MAILER_PASSWORD,
-    },
-    tls: {
-      ciphers: "SSLv3",
-    },
-  });
-  const mailOptions = {
-    from: "dwarpal-vjti@outlook.com",
-    to: email,
-    subject: "Verify your email",
-    text: `Your verification code is: ${verificationCode}`,
-  };
-
-  transporter.sendMail(mailOptions, (err) => {
-    console.log("Inside the sendMail");
-    if (err) {
-      console.log(err);
-      // res.status(500).json({ message: 'Error sending email' });
+  
+  sendOTPMail(email,verificationCode,(err,result)=>{
+    if(result){
       res
         .status(200)
-        .json({ message: "Verification code sent to email faileds" });
+        .json({ error:err, message: "Verification code sent to email faileds" });
     } else {
       res.status(200).json({ message: "Verification code sent to email" });
     }
-  });
+  })
+
   User.findOne({
     where: {
       email: email,
