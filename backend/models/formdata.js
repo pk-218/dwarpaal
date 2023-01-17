@@ -83,7 +83,7 @@ const formdata = (sequelize) => {
     },
     faculty_email: {
       type: Sequelize.STRING,
-      defaultValue: false
+      defaultValue: "dwarpal.vjti@gmail.com"
     },
   });
 

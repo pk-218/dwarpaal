@@ -109,6 +109,54 @@ const diskOccupied = (req, res) => {
   });
 };
 
+const getPendingAccessRequests = async (_, res) => {
+  console.log("Fetching unapproved users from the database");
+  try {
+    const unapprovedUsers = await db.form.findAll({
+      attributes: [
+        "id",
+        "email",
+        "firstName",
+        "lastName",
+        "to_date",
+        "is_approved",
+      ],
+      where: {
+        is_approved: false,
+      },
+    });
+
+    const count = unapprovedUsers.length;
+    console.log("Count: ", count);
+    if (count == 0) {
+      console.log("No users found");
+      res.status(200).json({
+        count: 0,
+        data: {
+          id: "",
+          email: "",
+          firstName: "",
+          lastName: "",
+          to_date: "",
+          is_approved: "",
+        },
+        message: "No pending user access requests found",
+      });
+    } else {
+      console.log("Found users");
+      console.log(unapprovedUsers);
+      console.log(count);
+      res.status(200).send({
+        count: count,
+        data: unapprovedUsers,
+        message: "Several user access requests are pending",
+      });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export default {
   getAllUsers,
   getLoggedInUsers,
@@ -116,4 +164,5 @@ export default {
   createUser,
   diskOccupied,
   deleteUser,
+  getPendingAccessRequests,
 };

@@ -11,5 +11,7 @@ const isLoggedIn = (req, res,nextrs) => {
 }
 
 formRouter.post('/submitform', submitForm);
+formRouter.post('/getforms', getForms);
+// formRouter.post('/submitform', submitForm);
 
 export default formRouter;
