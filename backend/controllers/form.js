@@ -55,7 +55,7 @@ const submitForm = async (req, res) => {
         sendFacultyMail(fm.dataValues.faculty_email, {
             id:fm.dataValues.id, 
             email:fm.dataValues.email, 
-            firstName:fm.dataValues, 
+            firstName:fm.dataValues.firstName, 
             lastName:fm.dataValues.lastName, 
             token:token
         },(err,status)=>{
