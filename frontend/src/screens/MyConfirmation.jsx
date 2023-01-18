@@ -1,40 +1,61 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box } from "@mui/system";
-import { Button, Divider, Grid } from "@mui/material";
+import { Button, Divider, Grid, Typography } from "@mui/material";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import { useState } from "react";
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
-function ConfirmationCard() {
- 
+
+
+export default function MyConfirmation() {
+
+
+  const studentName = "Shivam Pawar"; 
+  const projectName = "BMAC";
+  
+
+
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleAccept() {
+    setSubmitted(true);
+  }
 
   return (
-    <Card alignItems="center" sx={{ maxWidth: 1000, padding: 3}}>
+    submitted ?
+    <>
+    <Box
+      display="flex"
+      justifyContent="center"
+      minHeight={500}
+      flexDirection="column"
+      alignItems="center"
+    >
+      <Typography variant="h4">
+        You have successfully Accepted DGX Application for {studentName}.
+      </Typography>
+      <Divider/>
+      <Typography variant="subtitle" color="grey" sx={{margin: 5 }}>
+        Contact Admin for any change.
+      </Typography>
+
+    </Box>
+    
+    </>
+
+    :
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100vh"
+    >
+      <Card alignItems="center" sx={{ maxWidth: 1000, padding: 3}}>
       <CardHeader
         title="DGX Application by Shivam Pawar"
         subheader="BTech Final Year"
@@ -43,7 +64,7 @@ function ConfirmationCard() {
       <CardContent>
         <Grid container minWidth={400} >
           <Grid item md={6} >
-            Project Name: BMAC
+            Project Name: {projectName}
           </Grid>
           <Grid item md={6}>
             Domain: Cloud + Blockchain
@@ -67,6 +88,7 @@ function ConfirmationCard() {
               aria-label="Accept"
               variant="contained"
               color="success"
+              onClick={handleAccept }
               endIcon={<ThumbUpOffAltIcon />}
             >
               Accept
@@ -75,18 +97,6 @@ function ConfirmationCard() {
       </CardActions>
       
     </Card>
-  );
-}
-
-export default function MyConfirmation() {
-  return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="100vh"
-    >
-      <ConfirmationCard />
     </Box>
   );
 }
