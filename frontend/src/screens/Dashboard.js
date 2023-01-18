@@ -1,10 +1,9 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 // import { tokens } from "../../theme";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import StorageIcon from "@mui/icons-material/Storage";
 import StatBox from "../components/StatBox";
-import { mockTransactions } from "../data/mockData";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
@@ -23,6 +22,7 @@ const Dashboard = () => {
   const [loggedInUsers, setLoggedInUsers] = useState([]);
   const [memoryUsage, setMemoryUsage] = useState([]);
   const [diskOccupied, setDiskOccupied] = useState([]);
+  const [pendingRequests, setPendingRequests] = useState([]);
   var nums = [145.87, 223.8, 111.34, 45, 65.6];
   var labels = [
     "pkkhushalani_b19",
@@ -32,58 +32,83 @@ const Dashboard = () => {
     "abcat_b19",
   ];
 
-  async function GAU() {
-    var as = await axios
-      .get("http://localhost:5000/api/admin/get-all-users")
-      .then((res) => {
-        setAllUsers(res.data);
-      });
-    return as;
-  }
-
-  async function LIU() {
-    return await axios
-      .get("http://localhost:5000/api/admin/get-logged-in-users")
-      .then((res) => {
-        setLoggedInUsers(res.data);
-      });
-  }
-
-  async function MUPU() {
-    return await axios
-      .get("http://localhost:5000/api/admin/memory-usage-per-user")
-      .then((res) => {
-        setMemoryUsage(res.data);
-        for (var i = 0; i < res.data.length; i++) {
-          nums.push(res.data[i]["total_mem_usage"]);
-          labels.push(res.data[i]["username"]);
-        }
-        console.log(nums, labels);
-      });
-  }
-
-  async function DO() {
-    return await axios
-      .get("http://localhost:5000/api/admin/disk-occupied")
-      .then((res) => {
-        setDiskOccupied(res.data);
-      });
-  }
-
   useEffect(() => {
-    setTimeout(() => {
-      GAU();
-    }, 0);
-    setTimeout(() => {
-      LIU();
-    }, 4000);
-    setTimeout(() => {
-      MUPU();
-    }, 8000);
-    setTimeout(() => {
-      DO();
-    }, 12000);
+    getPendingAccessRequests();
   }, []);
+
+  async function getPendingAccessRequests() {
+    const res = await axios.get("/admin/pending-requests");
+    const unapprovedUsers = [];
+    console.log(unapprovedUsers);
+    unapprovedUsers.push({
+      id: "191080040",
+      email: "pkkhushalani_b19",
+      to_date: "2023-02-20",
+      is_approved: false,
+    });
+    const unapprovedUsersNew = unapprovedUsers.map((user, _) => {
+      return {
+        ...user,
+        to_date: getDate(user.to_date),
+        email: getUsername(user.email),
+      };
+    });
+    setPendingRequests(unapprovedUsersNew);
+    console.log(unapprovedUsersNew);
+  }
+
+  const getDate = (utcDateString) => {
+    const [date, _] = utcDateString.split("T");
+    console.log(date);
+    return date;
+  };
+
+  const getUsername = (email) => {
+    const [username, _] = email.split("@");
+    console.log(username);
+    return username;
+  };
+
+  async function getAllUsers() {
+    const users = await axios.get("/admin/get-all-users");
+    setAllUsers(users.data);
+  }
+
+  async function getLoggedInUsers() {
+    const users = await axios.get("/admin/get-logged-in-users");
+    setLoggedInUsers(users.data);
+  }
+
+  async function getMemoryUsagePerUser() {
+    const memoryUsage = await axios.get("/admin/memory-usage-per-user");
+    for (var i = 0; i < memoryUsage.data.length; i++) {
+      nums.push(res.data[i]["total_mem_usage"]);
+      labels.push(res.data[i]["username"]);
+    }
+    console.log(nums, labels);
+    setMemoryUsage(memoryUsage.data);
+  }
+
+  async function getDiskOccupied() {
+    await axios.get("/admin/disk-occupied").then((res) => {
+      setDiskOccupied(res.data);
+    });
+  }
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     getAllUsers();
+  //   }, 0);
+  //   setTimeout(() => {
+  //     getLoggedInUsers();
+  //   }, 4000);
+  //   setTimeout(() => {
+  //     getMemoryUsagePerUser();
+  //   }, 8000);
+  //   setTimeout(() => {
+  //     getDiskOccupied();
+  //   }, 12000);
+  // }, []);
   return (
     <>
       <Box m="20px" p="20px" className="title">
@@ -204,9 +229,9 @@ const Dashboard = () => {
                 Recent Access Requests
               </Typography>
             </Box>
-            {mockTransactions.map((transaction, i) => (
+            {pendingRequests.map((request, i) => (
               <Box
-                key={`${transaction.txId}-${i}`}
+                key={`${request.id}-${i}`}
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
@@ -215,14 +240,21 @@ const Dashboard = () => {
               >
                 <Box>
                   <Typography color="#fdde6c" variant="h5" fontWeight="600">
-                    {transaction.txId}
+                    {request.id}
                   </Typography>
-                  <Typography color="white">{transaction.user}</Typography>
+                  <Typography color="white">{request.email}</Typography>
                 </Box>
-                <Box color="white">{transaction.date}</Box>
-                <Box backgroundColor="#fdde6c" p="5px 10px" borderRadius="4px">
-                  {transaction.cost}
-                </Box>
+                <Box color="white">{request.to_date}</Box>
+                <Button
+                  className="py-2 px-4"
+                  style={{
+                    borderRadius: "4px",
+                    backgroundColor: "#fdde6c",
+                    color: "black",
+                  }}
+                >
+                  Grant
+                </Button>
               </Box>
             ))}
           </Box>
