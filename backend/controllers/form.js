@@ -4,11 +4,6 @@ import { sendFacultyMail } from "../utils/mailSender.js";
 const Form = db.form;
 
 const submitForm = async (req, res) => {
-    // temporarily using this
-    req.session.user = {
-        id: "191080048",
-        email:"loggedstudent@mail.vjti.in"
-    }
     req.body.reqGPU = parseInt(req.body.reqGPU);
     req.body.reqGPUMem = parseInt(req.body.reqGPUMem);
     req.body.reqCPU = parseInt(req.body.reqCPU);
@@ -55,7 +50,7 @@ const submitForm = async (req, res) => {
         sendFacultyMail(fm.dataValues.faculty_email, {
             id:fm.dataValues.id, 
             email:fm.dataValues.email, 
-            firstName:fm.dataValues, 
+            firstName:fm.dataValues.firstName, 
             lastName:fm.dataValues.lastName, 
             token:token
         },(err,status)=>{
