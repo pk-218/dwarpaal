@@ -192,4 +192,16 @@ const verifyCode = (req, res) => {
     });
 };
 
-export { generateAPIKey, validateToken, logout, sendCode, verifyCode };
+const adminLogin = (req,res) =>{
+    const {email,password} = req.body;
+    if(email == process.env.ADMINEMAIL && password == process.env.ADMINPASSWORD){
+      req.session.admin = {
+        email : email
+      }
+      res.status(200).send({success:true, msg:"Admin logged in successfully"});
+    } else{
+      res.status(401).send({success:false, msg:"Wrong Credentials!"}); 
+    }
+}
+
+export { generateAPIKey, validateToken, logout, sendCode, verifyCode, adminLogin };
