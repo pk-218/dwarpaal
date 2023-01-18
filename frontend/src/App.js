@@ -33,7 +33,7 @@ function App() {
             <Route path="/login/staff" element={<StaffLoginForm />} />
             <Route path="/request-form" element={<Checkout />} />
             <Route path="/faq" element={<FAQ />} />  
-            <Route path="/fcon" element={<MyConfirmation/> } />       
+            <Route path="/faculyConfirmation" element={<MyConfirmation/> } />       
           </Routes>
         )}
       </Container>

@@ -79,15 +79,15 @@ const Dashboard = () => {
     setLoggedInUsers(users.data);
   }
 
-  async function getMemoryUsagePerUser() {
-    const memoryUsage = await axios.get("/admin/memory-usage-per-user");
-    for (var i = 0; i < memoryUsage.data.length; i++) {
-      nums.push(res.data[i]["total_mem_usage"]);
-      labels.push(res.data[i]["username"]);
-    }
-    console.log(nums, labels);
-    setMemoryUsage(memoryUsage.data);
-  }
+  // async function getMemoryUsagePerUser() {
+  //   const memoryUsage = await axios.get("/admin/memory-usage-per-user");
+  //   for (var i = 0; i < memoryUsage.data.length; i++) {
+  //     nums.push(res.data[i]["total_mem_usage"]);
+  //     labels.push(res.data[i]["username"]);
+  //   }
+  //   console.log(nums, labels);
+  //   setMemoryUsage(memoryUsage.data);
+  // }
 
   async function getDiskOccupied() {
     await axios.get("/admin/disk-occupied").then((res) => {

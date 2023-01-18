@@ -1,18 +1,19 @@
 import { db } from "../utils/sqlConfig.js";
 const User = db.user;
+const Form = db.form;
 
 const getStudentForm = (req, res)=>{
     const {id} = req.body;
-    User.findOne({
+    Form.findOne({
         where: {
             id : id
         }
-    }).then((user)=>{
-        if(!user){
-            res.status(404).send({success:false,message:"User not found!"});
+    }).then((form)=>{
+        if(!form){
+            res.status(404).send({success:false,message:"Form not found!"});
         }
         else{
-            res.status(200).send({success:true, student:user});
+            res.status(200).send({success:true, student:form});
         }
     });
 }
@@ -20,25 +21,26 @@ const getStudentForm = (req, res)=>{
 const updateFormStatus = (req, res)=>{
     // assuming acceptanceStatus is boolean
     const {id, facultyToken, acceptanceStatus} = req.body;
-    User.findOne({
+    console.log(req.body);
+    Form.findOne({
         where: {
             id: id
         }
-    }).then((user)=>{
-        if(!user){
-            res.status(404).send({success:false,message:"User not found!"});
+    }).then((form)=>{
+        if(!form){
+            res.status(404).send({success:false,message:"User form not found!"});
         }
         else{
-            if(user.faculty_token != facultyToken){
+            if(form.faculty_token != facultyToken){
                 res.status(403).send({success: false, message:"Faculty token doesn't match!"});
             } else {
-                User.update({ faculty_status:acceptanceStatus, faculty_pending_status:false },
+                Form.update({ faculty_status:acceptanceStatus, faculty_pending_status:false },
                     { where: {id: id} })
-                    .then((user)=>{
-                        res.status(200).send({success:true, message:"Student form updated!", user});
+                    .then((form)=>{
+                        res.status(200).send({success:true, message:"Student form updated!", form});
                     })
                     .catch((err)=>{
-                        console.log("Error while updating User",err);
+                        console.log("Error while updating user form",err);
                         res.status(500).send({success:false, err:err});
                     })
             }

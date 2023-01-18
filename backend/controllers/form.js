@@ -25,6 +25,8 @@ const submitForm = async (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         title: req.body.projectTitle,
+        yearOfStudy: req.body.yearOfStudy,
+        profInCharge: req.body.profInCharge,
         domain: req.body.domain,
         n_gpu: req.body.reqGPU,
         gpu_memory: req.body.reqGPUMem,

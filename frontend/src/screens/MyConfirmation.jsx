@@ -7,25 +7,52 @@ import { Box } from "@mui/system";
 import { Button, Divider, Grid, Typography } from "@mui/material";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import {useSearchParams} from 'react-router-dom';
+import axios from 'axios';
 
 
 
 export default function MyConfirmation() {
+  
+  const [searchParams, _] = useSearchParams();
 
+  const id = searchParams.get('id');
+  const token = searchParams.get('token');
 
   const studentName = "Shivam Pawar"; 
   const projectName = "BMAC";
-  
-
-
+  const [formdata, setFormData] = useState('');
   const [submitted, setSubmitted] = useState(false);
-
-  function handleAccept() {
+  const [status, setStatus] = useState(false);
+  
+  useEffect(()=>{
+    axios.post("/faculty/getStudentForm",{id:id})
+      .then((result)=>{
+        console.log(result.data);
+        setFormData(result.data.student);
+      }).catch((err)=>{
+          console.log("Error in fetching student - ",err);
+      });
+  },[]);
+  function updateForm(acceptanceStatus = false){
     setSubmitted(true);
+    axios.post("/faculty/updateFormStatus",{id:id,facultyToken:token,acceptanceStatus})
+      .then((result)=>{
+        console.log(result.data);
+      }).catch((err)=>{
+          console.log("Error in Updating student form - ",err);
+      });
   }
-
+  function handleAccept() {
+    setStatus(true);
+    updateForm(true);
+  }
+  function handleReject() {
+    setStatus(false);
+    updateForm(false);
+  }
+  
   return (
     submitted ?
     <>
@@ -37,7 +64,7 @@ export default function MyConfirmation() {
       alignItems="center"
     >
       <Typography variant="h4">
-        You have successfully Accepted DGX Application for {studentName}.
+        You have {status?"Accepted":"Rejected"} DGX Application for {formdata.firstName} {formdata.lastName}.
       </Typography>
       <Divider/>
       <Typography variant="subtitle" color="grey" sx={{margin: 5 }}>
@@ -57,17 +84,17 @@ export default function MyConfirmation() {
     >
       <Card alignItems="center" sx={{ maxWidth: 1000, padding: 3}}>
       <CardHeader
-        title="DGX Application by Shivam Pawar"
-        subheader="BTech Final Year"
+        title={`DGX Application by ${formdata.firstName} ${formdata.lastName}`}
+        subheader={`${formdata.yearOfStudy}`}
       />
       <Divider />
       <CardContent>
         <Grid container minWidth={400} >
           <Grid item md={6} >
-            Project Name: {projectName}
+            Project Name: {`${formdata.title}` || "BMAC"}
           </Grid>
           <Grid item md={6}>
-            Domain: Cloud + Blockchain
+            Domain: {`${formdata.domain}` || "Cloud + Blockchain"}
           </Grid>
         </Grid>
       </CardContent>
@@ -79,6 +106,7 @@ export default function MyConfirmation() {
               aria-label="Decline"
               variant="outlined"
               color="error"
+              onClick={handleReject}
               endIcon={<ThumbDownOffAltIcon />}
             >
               Decline
@@ -88,7 +116,7 @@ export default function MyConfirmation() {
               aria-label="Accept"
               variant="contained"
               color="success"
-              onClick={handleAccept }
+              onClick={handleAccept}
               endIcon={<ThumbUpOffAltIcon />}
             >
               Accept

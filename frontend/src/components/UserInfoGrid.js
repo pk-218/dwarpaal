@@ -3,7 +3,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { mockDataContacts } from "../data/mockData";
 import axios from "axios";
 
-axios.post("http://localhost:8000/request-form/getForm").then((res) => {
+axios.post("/api/forms/getforms").then((res) => {
   console.log("Res Data :", res.data);
 });
 
