@@ -20,7 +20,6 @@ const StudentLoginForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   console.log("errors" + errors);
@@ -63,11 +62,12 @@ const StudentLoginForm = () => {
       email: userData.email,
       id: userData.id,
       code: totp,
-    }).then(res=>{
-      console.log('clientId',res.data.clientId);
-      localStorage.setItem('clientId',res.data.clientId);
+    }).then(res => {
+      console.log('clientId', res.data.clientId);
+      localStorage.setItem('clientId', res.data.clientId);
+      localStorage.setItem('hasLoggedInAsStudent', 'true')
     });
-    navigate("/request-form");
+    navigate("/home");
     //   .then((res) => res.json())
     //   .then((res) => {
     //     if (res.isLoggedIn == true) {

@@ -10,6 +10,53 @@ a:active {
   text-decoration: none;
 }
 
+.hero-section {
+  height: 86vh;
+}
+
+.lhs-hero-section {
+  float: left;
+  width: 60%;
+  background-color: #284b63;
+  color: white;
+}
+
+.lhs-hero {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 86vh;
+  margin-left: 30px;
+}
+
+.lhs-btn-container-row {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.lhs-btn-container-column {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lhs-btn {
+  width: 250px;
+}
+
+.rhs-hero-section {
+  float: right;
+  width: 40%;
+  background: url(./images/nvidia-dgx.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+
+.footer-link a {
+  color: #284b63;
+}
+
 .login-container {
   display: flex;
   flex-direction: row;
@@ -43,7 +90,6 @@ input[type="number"] {
 }
 
 .header-branding {
-
   padding: 11px;
   background-color: #284b63;
   color: white;
@@ -77,4 +123,20 @@ input[type="number"] {
 .navbar-link:focus {
   font-size: large;
   color: aliceblue;
+}
+
+code {
+  /* use if theme for CopyBlock is paraisoLight or monoBlue */
+  /* color: #284b63; */
+  /* use if theme for CopyBlock is sunburst */
+  color: powderblue;
+}
+
+.code-block {
+  font-family: 'Fira Mono', monospace;
+}
+
+.ordered-list {
+  font-size: medium;
+  line-height: 1.7em;
 }

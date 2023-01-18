@@ -1,14 +1,7 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
-import Typography from "@mui/material/Typography";
+import { Box, Button, Container, Paper, Step, Stepper, StepLabel, Typography } from '@mui/material';
+import { Link } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import PersonalDetail from "../components/Student/RequestForm/PersonalDetail";
 import PaymentForm from "../components/Student/RequestForm/SystemRequirement";
@@ -16,6 +9,7 @@ import Review from "../components/Student/RequestForm/Review";
 import Copyright from "../components/Copyright"
 import { useState } from "react";
 import axios from "axios";
+
 
 const steps = ["Project Details", "System Requirements", "Form Confirmation"];
 
@@ -70,11 +64,12 @@ export default function Checkout() {
       console.log("form submitted successfully ! ");
       // axios.interceptors.request.use(config=>{
       //   const clientId = localStorage.getItem('clientId');
-      //   console.log("Locala client",clientId);
+      //   console.log("Locale client",clientId);
       //   config.headers['client-id'] = clientId;
       //   return config;
       // })
       axios.post("http://localhost:8000/request-form/", formData);
+      localStorage.setItem('hasSubmitted', 'true')
     }
   };
 
@@ -131,6 +126,11 @@ export default function Checkout() {
               <Typography variant="subtitle1">
                 We will send you an email if your request has any update.
               </Typography>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Link to='/home'>
+                  <FormButtonContained variant='contained' sx={{ mt: 3 }}>Return Home</FormButtonContained>
+                </Link>
+              </Box>
             </React.Fragment>
           ) : (
             <React.Fragment>
