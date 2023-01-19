@@ -2,6 +2,7 @@ import React from "react";
 import "./HomeScreen.css";
 import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
+import Copyright from "../components/Copyright";
 
 const HomeScreen = () => {
   return (
@@ -9,7 +10,7 @@ const HomeScreen = () => {
       <h1>
         <Typewriter
           options={{
-            strings: ["Welcome to Dwarpaal"],
+            strings: ["Welcome to Dwarpaaal', 'The gateway to DGX"],
             autoStart: true,
             loop: true,
           }}
@@ -33,6 +34,8 @@ const HomeScreen = () => {
           </Link>
         </div>
       </div>
+
+      <Copyright />
     </>
   );
 };

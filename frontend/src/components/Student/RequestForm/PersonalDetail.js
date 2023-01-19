@@ -5,9 +5,11 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-
-const FormTextfield = styled(TextField)({
+const CustomFormTextfield = styled(TextField)({
   "& .MuiOutlinedInput-root": {
     "&.Mui-focused fieldset": {
       borderColor: "#284b63",
@@ -16,22 +18,60 @@ const FormTextfield = styled(TextField)({
   },
 });
 
-export default function PersonalDetail({ formData, setFormData }) {
-  const [fromDate, setFromDate] = useState();
-  const [toDate, setToDate] = useState();
+const years = [
+  {
+    value: "b1",
+    label: "BTech First Year",
+  },
+  {
+    value: "b2",
+    label: "BTech Second Year",
+  },
+  {
+    value: "b3",
+    label: "BTech Third Year",
+  },
+  {
+    value: "b4",
+    label: "BTech Final Year",
+  },
+  {
+    value: "m1",
+    label: "MTech First Year",
+  },
+  {
+    value: "m1",
+    label: "MTech Second Year",
+  },
+  {
+    value: "mca1",
+    label: "MCA First Year",
+  },
+  {
+    value: "mca2",
+    label: "MCA Second Year",
+  },
+  {
+    value: "phd",
+    label: "PHD",
+  },
+];
 
+export default function PersonalDetail({ formData, setFormData }) {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Personal + Project Details
       </Typography>
+
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
-          <FormTextfield
+          <CustomFormTextfield
             required
             id="firstName"
             name="firstName"
             label="First name"
+            placeholder="for e.g. John"
             InputLabelProps={{
               style: { color: "#284b63" },
             }}
@@ -47,12 +87,14 @@ export default function PersonalDetail({ formData, setFormData }) {
             value={formData.firstName}
           />
         </Grid>
+
         <Grid item xs={12} sm={6}>
-          <FormTextfield
+          <CustomFormTextfield
             required
             id="lastName"
             name="lastName"
             label="Last name"
+            placeholder="for e.g. Doe"
             InputLabelProps={{
               style: { color: "#284b63" },
             }}
@@ -68,41 +110,42 @@ export default function PersonalDetail({ formData, setFormData }) {
             value={formData.lastName}
           />
         </Grid>
+
         <Grid item xs={12}>
-        <FormControl fullWidth>
-        <InputLabel id="yearOfStudylabel">Year of Study</InputLabel>
-        <Select
-          labelId="yearOfStudylabel"
-          id="yearOfStudy"
-          value={formData.yearOfStudy}
-          autoComplete="Year of Study"
-          label="yearOfStudy"
-          onChange={(e) => {
-            setFormData({
-              ...formData,
-              yearOfStudy: e.target.value,
-            });
-          }}
-        >
-          <MenuItem value={"BTech First Year"} >BTech First Year</MenuItem>
-          <MenuItem value={"BTech Second Year"} >BTech Second Year</MenuItem>
-          <MenuItem value={"BTech Third Year"} >BTech Third Year</MenuItem>
-          <MenuItem value={"BTech Final Year"} >BTech Final Year</MenuItem>
-          <MenuItem value={"MTech First Year"} >MTech First Year</MenuItem>
-          <MenuItem value={"MTech Second Year"} >MTech Second Year</MenuItem>
-          <MenuItem value={"MCA First Year"} >MCA First Year</MenuItem>
-          <MenuItem value={"MCA Second Year"} >MCA Second Year</MenuItem>
-          <MenuItem value={"PHD"} >PHD</MenuItem>
-          
-        </Select>
-      </FormControl>
+          <CustomFormTextfield
+            id="yearOfStudy"
+            select
+            required
+            labelId="yearOfStudyLabel"
+            label="Year of Study"
+            InputLabelProps={{
+              style: { color: "#284b63" },
+            }}
+            fullWidth
+            autoComplete="Year of Study"
+            value={formData.yearOfStudy}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                yearOfStudy: e.target.value,
+              });
+            }}
+          >
+            {years.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </CustomFormTextfield>
         </Grid>
-        <Grid item xs={6}>
-          <FormTextfield
+
+        <Grid item xs={12} sm={6}>
+          <CustomFormTextfield
             required
             id="projectTitle"
             name="projectTitle"
             label="Project Title"
+            placeholder="for e.g. dgx-project, project-dgx-1"
             InputLabelProps={{
               style: { color: "#284b63" },
             }}
@@ -118,8 +161,9 @@ export default function PersonalDetail({ formData, setFormData }) {
             value={formData.projectTitle}
           />
         </Grid>
-        <Grid item xs={6}>
-          <FormTextfield
+
+        <Grid item xs={12} sm={6}>
+          <CustomFormTextfield
             required
             id="profInCharge"
             name="profInCharge"
@@ -141,11 +185,12 @@ export default function PersonalDetail({ formData, setFormData }) {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <FormTextfield
+          <CustomFormTextfield
             required
             id="fromdate"
             name="fromdate"
             label="From Date"
+            placeholder="dd/mm/yyyy"
             InputLabelProps={{
               style: { color: "#284b63" },
             }}
@@ -160,15 +205,32 @@ export default function PersonalDetail({ formData, setFormData }) {
             }}
             value={formData.fromdate}
           />
-          
-
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              required
+              id="fromdate"
+              name="fromdate"
+              label="From date"
+              // placeholder="mm/dd/yyyy"
+              fullWidth
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  fromdate: e.target.value
+                });
+              }}
+              value={formData.fromdate}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider> */}
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormTextfield
+          <CustomFormTextfield
             required
             id="todate"
             name="todate"
             label="To Date"
+            placeholder="dd/mm/yyyy"
             InputLabelProps={{
               style: { color: "#284b63" },
             }}

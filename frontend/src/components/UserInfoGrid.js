@@ -1,7 +1,9 @@
-import { Box, Button, Switch } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { mockDataContacts } from "../data/mockData";
+import React, { useState } from "react";
 import axios from "axios";
+import { Box, Button, Switch } from "@mui/material";
+import { DataGrid, GridToolbar, gridClasses } from "@mui/x-data-grid";
+import { alpha, styled } from "@mui/material/styles";
+import { mockDataContacts } from "../data/mockData";
 
 axios.post("/api/forms/getforms").then((res) => {
   console.log("Res Data :", res.data);
@@ -25,8 +27,6 @@ const renderDetailsButton = (params) => {
 };
 
 const UserInfoGrid = () => {
-
-
   const columns = [
     { field: "id", headerName: "ID" },
     { field: "registrarId", headerName: "Registration ID", flex: 0.2 },

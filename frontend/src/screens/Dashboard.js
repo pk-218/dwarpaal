@@ -4,24 +4,18 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import StorageIcon from "@mui/icons-material/Storage";
 import StatBox from "../components/StatBox";
-import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-
+import Copyright from "../components/Copyright";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { chartColours } from "./colours";
-
 import "../App.css";
+import PieChart from "../components/PieChart";
 
 const Dashboard = () => {
-  ChartJS.register(ArcElement, Tooltip, Legend);
-  // const theme = useTheme();
-  // const colors = tokens(theme.palette.mode);
   const [allUsers, setAllUsers] = useState([]);
   const [loggedInUsers, setLoggedInUsers] = useState([]);
   const [memoryUsage, setMemoryUsage] = useState([]);
   const [diskOccupied, setDiskOccupied] = useState([]);
+
   const [pendingRequests, setPendingRequests] = useState([]);
   var nums = [145.87, 223.8, 111.34, 45, 65.6];
   var labels = [
@@ -30,6 +24,7 @@ const Dashboard = () => {
     "cmbaghele_b19",
     "psthakare_b19",
     "abcat_b19",
+    "dsghosh_b19",
   ];
 
   useEffect(() => {
@@ -111,7 +106,7 @@ const Dashboard = () => {
   // }, []);
   return (
     <>
-      <Box m="20px" p="20px" className="title">
+      <Box m="20px" className="title py-2">
         VM Usage Statistics
       </Box>
       <Box m="20px">
@@ -170,46 +165,30 @@ const Dashboard = () => {
           {/* ROW 2 */}
           <Box gridColumn="span 8" gridRow="span 3" backgroundColor="#353535">
             <Box
-              mt="25px"
-              p="0 30px"
-              display="flex "
-              justifyContent="space-between"
-              alignItems="center"
+              sx={{
+                mt: 3,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "relative",
+              }}
             >
               <Box>
-                <Typography variant="h5" fontWeight="600" color="white">
+                <Typography
+                  variant="h5"
+                  fontWeight="600"
+                  color="white"
+                  position="absolute"
+                  left="0"
+                  marginLeft="30px"
+                >
                   Memory in Use
                 </Typography>
-                <Box justifyItems="flex-end" p="0 225px" mb="100px">
-                  <Pie
-                    data={{
-                      labels: labels,
-                      maintainAspectRatio: false,
-                      responsive: true,
-                      datasets: [
-                        {
-                          data: nums,
-                          backgroundColor: chartColours,
-                          hoverBackgroundColor: chartColours,
-                        },
-                      ],
-                    }}
-                    options={{
-                      legend: {
-                        display: false,
-                        position: "right",
-                      },
-                      elements: {
-                        arc: {
-                          borderWidth: 0,
-                        },
-                      },
-                    }}
-                  />
+                <Box sx={{ mt: 8 }}>
+                  <PieChart labels={labels} data={nums} />
                 </Box>
               </Box>
             </Box>
-            <Box height="240px" m="-20px 0 0 0"></Box>
           </Box>
           <Box
             gridColumn="span 4"
@@ -260,6 +239,8 @@ const Dashboard = () => {
           </Box>
         </Box>
       </Box>
+
+      <Copyright />
     </>
   );
 };

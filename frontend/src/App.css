@@ -63,6 +63,7 @@ input[type="number"] {
   font-size: 2rem;
   font-weight: bolder;
 }
+
 .navbar-link {
   font-size: large;
   color: white;
@@ -73,7 +74,7 @@ input[type="number"] {
   color: aliceblue;
 }
 
-/* .navbar-link:active {
+.navbar-link:focus {
   font-size: large;
   color: aliceblue;
-} */
+}

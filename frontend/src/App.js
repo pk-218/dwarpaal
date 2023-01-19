@@ -8,11 +8,10 @@ import StudentLoginForm from "./components/StudentLoginForm";
 import StaffLoginForm from "./components/StaffLoginForm";
 import Dashboard from "./screens/Dashboard";
 import UserInfoGrid from "./components/UserInfoGrid";
-import Checkout from "./screens/CheckOut";
+import RequestForm from "./screens/RequestForm";
 import { useState } from "react";
 import FAQ from "./screens/FAQ";
 import MyConfirmation from "./screens/MyConfirmation";
-
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -31,9 +30,9 @@ function App() {
             <Route path="/" element={<HomeScreen />} />
             <Route path="/login/student" element={<StudentLoginForm />} />
             <Route path="/login/staff" element={<StaffLoginForm />} />
-            <Route path="/request-form" element={<Checkout />} />
-            <Route path="/faq" element={<FAQ />} />  
-            <Route path="/faculyConfirmation" element={<MyConfirmation/> } />       
+            <Route path="/request-form" element={<RequestForm />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/faculyConfirmation" element={<MyConfirmation />} />
           </Routes>
         )}
       </Container>
