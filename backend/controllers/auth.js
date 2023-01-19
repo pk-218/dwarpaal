@@ -1,8 +1,7 @@
 import Speakeasy from "speakeasy";
 import QR from "qr-image";
 import { db } from "../utils/sqlConfig.js";
-import { sendOTPMail } from "../utils/mailSender.js";
-
+import nodemailer from "nodemailer";
 const User = db.user;
 
 const generateAPIKey = (req, res, next) => {
@@ -111,17 +110,40 @@ const sendCode = (req, res) => {
   console.log(email, id);
   var verificationCode = Math.floor(Math.random() * 1000000);
   console.log("Verification code:", verificationCode);
-  
-  sendOTPMail(email,verificationCode,(err,result)=>{
-    if(result){
+
+  // send email with verification code
+  const transporter = nodemailer.createTransport({
+    host: "smtp-mail.outlook.com", // hostname
+    secureConnection: false, // use SSL
+    port: 587, // port for secure SMTP
+    auth: {
+      // type: 'OAuth2',
+      user: "dwarpal-vjti@outlook.com",
+      pass: "DWARPAL@12345",
+    },
+    tls: {
+      ciphers: "SSLv3",
+    },
+  });
+  const mailOptions = {
+    from: "dwarpal-vjti@outlook.com",
+    to: email,
+    subject: "Verify your email",
+    text: `Your verification code is: ${verificationCode}`,
+  };
+
+  transporter.sendMail(mailOptions, (err) => {
+    console.log("Inside the sendMail");
+    if (err) {
+      console.log(err);
+      // res.status(500).json({ message: 'Error sending email' });
       res
         .status(200)
-        .json({ error:err, message: "Verification code sent to email faileds" });
+        .json({ message: "Verification code sent to email faileds" });
     } else {
       res.status(200).json({ message: "Verification code sent to email" });
     }
-  })
-
+  });
   User.findOne({
     where: {
       email: email,
@@ -192,16 +214,4 @@ const verifyCode = (req, res) => {
     });
 };
 
-const adminLogin = (req,res) =>{
-    const {email,password} = req.body;
-    if(email == process.env.ADMINEMAIL && password == process.env.ADMINPASSWORD){
-      req.session.admin = {
-        email : email
-      }
-      res.status(200).send({success:true, msg:"Admin logged in successfully"});
-    } else{
-      res.status(401).send({success:false, msg:"Wrong Credentials!"}); 
-    }
-}
-
-export { generateAPIKey, validateToken, logout, sendCode, verifyCode, adminLogin };
+export { generateAPIKey, validateToken, logout, sendCode, verifyCode };

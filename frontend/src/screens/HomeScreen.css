@@ -1,27 +1,27 @@
 h1:first-child {
-  text-align: center;
-  font-size: 60px;
-  margin: 50px 0;
+    text-align: center;
+    font-size: 60px;
+    margin: 50px 0;
 }
 
 .btn-custom {
-  background-color: #284b63;
-  color: white;
-  border: 0;
+    background-color: #284b63;
+    color: white;
+    border: 0;
 }
 
 .btn-custom:hover {
-  background-color: #192f3e;
-  color: white;
-  border: 0;
+    background-color: #192f3e;
+    color: white;
+    border: 0;
 }
 
 .btn-main-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .btn-container {
-  margin: auto;
+    margin: auto;
 }

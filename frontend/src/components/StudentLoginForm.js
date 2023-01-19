@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { navigate, useNavigate } from "react-router-dom";
+// import { QRCode } from "./QRCode";
 
 const StudentLoginForm = () => {
   const [userData, setUserData] = useState({
@@ -34,19 +35,19 @@ const StudentLoginForm = () => {
 
   const onSubmit = () => {
     console.log(userData);
-    axios.post("/auth/sendcode/", userData);
+    axios.post("http://localhost:8000/api/auth/sendcode/", userData);
     setIsFormClicked(true);
   };
 
   const onOtpSubmit = () => {
     console.log(otp);
-    axios.post("/auth/verifycode/", {
+    axios.post("http://localhost:8000/api/auth/verifycode/", {
       email: userData.email,
       code: otp,
     });
     setIsOtpVerified(true);
     axios
-      .post("/auth/generateTOTPKey", {
+      .post("http://localhost:8000/api/auth/generateTOTPKey", {
         email: userData.email,
         id: userData.id,
       })
@@ -58,7 +59,7 @@ const StudentLoginForm = () => {
 
   const onTotpSubmit = () => {
     console.log("totp" + totp);
-    axios.post("/auth/validateCode/", {
+    axios.post("http://localhost:8000/api/auth/validateCode/", {
       email: userData.email,
       id: userData.id,
       code: totp,
@@ -67,7 +68,13 @@ const StudentLoginForm = () => {
       localStorage.setItem('clientId',res.data.clientId);
     });
     navigate("/request-form");
-    console.log("redirect called");
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     if (res.isLoggedIn == true) {
+    //       redirect("/request-form");
+    //     }
+    //   });
+    console.log("redirect called?");
   };
 
   const handleFormSubmit = (e) => {
