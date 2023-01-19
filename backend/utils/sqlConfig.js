@@ -7,11 +7,8 @@ const conn = new Sequelize(process.env.POSTGRES_DSN);
 const db = {};
 
 db.conn = conn;
-
 db.user = user(conn);
-
 db.form = formdata(conn);
-
 db.ROLES = ["student", "faculty", "admin"];
 
 const initPostgresDB = () => {

@@ -20,15 +20,13 @@ const app = express();
 app.use(
   cors({
     origin: "http://localhost:3000", // we'll move the url in .env file later
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
-
 //express middleware
 app.use(urlencoded({ extended: false }));
 app.use(json());
-
 const sessionConfig = {
   secret: "thisshouldbeabettersecret!",
   resave: false,
@@ -39,19 +37,17 @@ const sessionConfig = {
     maxAge: 1000 * 60 * 60 * 24,
   },
 };
-
 app.use(session(sessionConfig));
-
 // seting up routers
 app.use("/home", homeRouter);
 app.use("/api/user", usersRouter);
 app.use("/api/credentials", credentialsRouter);
 app.use("/api/admin", adminRouter);
-app.use("/request-form", formRouter)
-    
+app.use("/request-form", formRouter);
+
 app.use("/api/auth", authRouter);
-app.use("/api/forms",formRouter);
-app.use("/api/faculty",facultyRouter);
+app.use("/api/forms", formRouter);
+app.use("/api/faculty", facultyRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({

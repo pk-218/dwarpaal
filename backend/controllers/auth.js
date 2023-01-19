@@ -34,7 +34,6 @@ const generateAPIKey = (req, res, next) => {
         //   .catch((err) => {
         //     res.json({ success: false, message: "Error while storing sceret" });
         //   });
-
         const qr_svg = QR.imageSync(secret.otpauth_url, { type: "svg" });
         // res.type('svg');    const qr_svg = qr.imageSync(secret.otpauth_url, { type: 'svg' });
         const qrCode = qr_svg.toString("base64");
@@ -48,7 +47,6 @@ const generateAPIKey = (req, res, next) => {
       res.json({ success: false, message: "Error in fetching User!" });
     });
 };
-
 // app.post("/totp-generate", (req, res, next) => {
 //   res.send({
 //       "token": Speakeasy.totp({
@@ -58,7 +56,6 @@ const generateAPIKey = (req, res, next) => {
 //       "remaining": (30 - Math.floor((new Date()).getTime() / 1000.0 % 30))
 //   });
 // });
-
 const validateToken = (req, res) => {
   const { email, id, code } = req.body;
   User.findOne({
@@ -86,7 +83,7 @@ const validateToken = (req, res) => {
             id: user.id,
             email: user.email,
           };
-          console.log("session user",req.session.user);
+          console.log("session user", req.session.user);
           res.json({ isLoggedIn: true, message: "Login successful" });
         }
       }
@@ -104,23 +101,25 @@ const logout = (req, res) => {
     }
   });
 };
-
 const sendCode = (req, res) => {
   const { email, id } = req.body;
   // generate a verification code
   console.log(email, id);
   var verificationCode = Math.floor(Math.random() * 1000000);
   console.log("Verification code:", verificationCode);
-  
-  sendOTPMail(email,verificationCode,(err,result)=>{
-    if(result){
+
+  sendOTPMail(email, verificationCode, (err, result) => {
+    if (result) {
       res
         .status(200)
-        .json({ error:err, message: "Verification code sent to email faileds" });
+        .json({
+          error: err,
+          message: "Verification code sent to email faileds",
+        });
     } else {
       res.status(200).json({ message: "Verification code sent to email" });
     }
-  })
+  });
 
   User.findOne({
     where: {
@@ -157,10 +156,8 @@ const sendCode = (req, res) => {
       console.log("Error in :", err);
     });
 };
-
 const verifyCode = (req, res) => {
   const { email, code } = req.body;
-
   User.findOne({
     where: {
       email: email,
@@ -192,16 +189,28 @@ const verifyCode = (req, res) => {
     });
 };
 
-const adminLogin = (req,res) =>{
-    const {email,password} = req.body;
-    if(email == process.env.ADMINEMAIL && password == process.env.ADMINPASSWORD){
-      req.session.admin = {
-        email : email
-      }
-      res.status(200).send({success:true, msg:"Admin logged in successfully"});
-    } else{
-      res.status(401).send({success:false, msg:"Wrong Credentials!"}); 
-    }
-}
+const adminLogin = (req, res) => {
+  const { email, password } = req.body;
+  if (
+    email == process.env.ADMINEMAIL &&
+    password == process.env.ADMINPASSWORD
+  ) {
+    req.session.admin = {
+      email: email,
+    };
+    res
+      .status(200)
+      .send({ success: true, msg: "Admin logged in successfully" });
+  } else {
+    res.status(401).send({ success: false, msg: "Wrong Credentials!" });
+  }
+};
 
-export { generateAPIKey, validateToken, logout, sendCode, verifyCode, adminLogin };
+export {
+  generateAPIKey,
+  validateToken,
+  logout,
+  sendCode,
+  verifyCode,
+  adminLogin,
+};

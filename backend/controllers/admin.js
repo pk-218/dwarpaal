@@ -15,7 +15,6 @@ const all_users =
   'select * from users where username like "%\\_b%" escape "\\";';
 const logged_in_users =
   'select * from logged_in_users where user like "%\\_b%" escape "\\";';
-
 const createUser = (req, res) => {
   const id = req.body.id;
   const username = req.body.email.split("@")[0];

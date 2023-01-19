@@ -1,5 +1,12 @@
-import { Router } from 'express';
-import { generateAPIKey, validateToken, logout, sendCode, verifyCode, adminLogin } from "../controllers/auth.js";
+import { Router } from "express";
+import {
+  generateAPIKey,
+  validateToken,
+  logout,
+  sendCode,
+  verifyCode,
+  adminLogin,
+} from "../controllers/auth.js";
 
 const AuthRouter = Router();
 
@@ -9,7 +16,6 @@ AuthRouter.post("/generateTOTPKey", generateAPIKey);
 AuthRouter.post("/validateCode", validateToken);
 AuthRouter.post("/logout", logout);
 AuthRouter.post("/admin/login", adminLogin);
-
 
 // exporting defualt router
 export default AuthRouter;
