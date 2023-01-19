@@ -1,5 +1,4 @@
 import Sequelize, { DataTypes } from "sequelize";
-
 const user = (sequelize) => {
   const User = sequelize.define("users", {
     id: {
@@ -29,13 +28,12 @@ const user = (sequelize) => {
     role: {
       type: Sequelize.ENUM("student", "faculty", "admin"),
     },
-    secret:{
+    secret: {
       type: Sequelize.STRING,
-      defaulValue: ""
-    }
+      defaulValue: "",
+    },
   });
 
   return User;
 };
-
 export default user;

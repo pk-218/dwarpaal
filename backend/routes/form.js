@@ -1,16 +1,21 @@
 import { Router } from "express";
-import { submitForm, getForms } from "../controllers/form.js"
+import { submitForm, getForms } from "../controllers/form.js";
 const formRouter = Router();
 
 // ??
-const isLoggedIn = (req, res,nextrs) => {
-    
-    //to refactor this to controller
-    console.log("Res",req.session.user);
-    return req.session.user.id != null
-}
+const isLoggedIn = (req, res, next) => {
+  console.log("Res", req.session.user);
+  if (req.session.user == null) {
+    res
+      .status(401)
+      .send({ sucess: false, message: "Not authorize to submit form!" });
+  } else {
+    next();
+  }
+};
 
-formRouter.post('/', submitForm)
-formRouter.post('/getForm', getForms )
+formRouter.post("/submitform", isLoggedIn, submitForm);
+formRouter.post("/getforms", getForms);
+// formRouter.post('/submitform', submitForm);
 
 export default formRouter;
