@@ -3,7 +3,6 @@ import { Button, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import { QRCode } from "./QRCode";
 
 const StudentLoginForm = () => {
   const [userData, setUserData] = useState({
@@ -34,19 +33,19 @@ const StudentLoginForm = () => {
 
   const onSubmit = () => {
     console.log(userData);
-    axios.post("http://localhost:8000/api/auth/sendcode/", userData);
+    axios.post("/auth/sendcode/", userData);
     setIsFormClicked(true);
   };
 
   const onOtpSubmit = () => {
     console.log(otp);
-    axios.post("http://localhost:8000/api/auth/verifycode/", {
+    axios.post("/auth/verifycode/", {
       email: userData.email,
       code: otp,
     });
     setIsOtpVerified(true);
     axios
-      .post("http://localhost:8000/api/auth/generateTOTPKey", {
+      .post("/auth/generateTOTPKey", {
         email: userData.email,
         id: userData.id,
       })
@@ -58,15 +57,17 @@ const StudentLoginForm = () => {
 
   const onTotpSubmit = () => {
     console.log("totp" + totp);
-    axios.post("http://localhost:8000/api/auth/validateCode/", {
-      email: userData.email,
-      id: userData.id,
-      code: totp,
-    }).then(res => {
-      console.log('clientId', res.data.clientId);
-      localStorage.setItem('clientId', res.data.clientId);
-      localStorage.setItem('hasLoggedInAsStudent', 'true')
-    });
+    axios
+      .post("/auth/validateCode/", {
+        email: userData.email,
+        id: userData.id,
+        code: totp,
+      })
+      .then((res) => {
+        console.log("clientId", res.data.clientId);
+        localStorage.setItem("clientId", res.data.clientId);
+        localStorage.setItem("hasLoggedInAsStudent", "true");
+      });
     navigate("/home");
     //   .then((res) => res.json())
     //   .then((res) => {
