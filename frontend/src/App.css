@@ -140,3 +140,17 @@ code {
   font-size: medium;
   line-height: 1.7em;
 }
+
+.navbar-toggler {
+  border-color: white;
+  background-color: white;
+}
+
+.navbar-toggler:hover {
+  border-color: aliceblue;
+  background-color: aliceblue;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
