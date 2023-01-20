@@ -25,6 +25,7 @@ const FormButtonContained = styled(Button)(() => ({
     '&:hover': {
         backgroundColor: '#192f3e',
     },
+    padding: '8px',
 }))
 
 export default function SignIn() {

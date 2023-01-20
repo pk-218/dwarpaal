@@ -49,7 +49,7 @@ a:active {
 .rhs-hero-section {
   float: right;
   width: 40%;
-  background: url(./images/nvidia-dgx.jpg) no-repeat;
+  background: url(./images/dgx-a100.jpg) no-repeat;
   background-size: 100% 100%;
 }
 
