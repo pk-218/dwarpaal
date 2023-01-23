@@ -12,7 +12,7 @@ const submitForm = async (req, res) => {
   req.body.reqSysMem = parseInt(req.body.reqSysMem);
   req.body.fromdate = new Date(req.body.fromdate);
   req.body.todate = new Date(req.body.todate);
-  req.body.faculty_email = "chahatmbaghele@gmail.com";
+  req.body.faculty_email = "pankajkk218@gmail.com";
 
   console.log("REcieved ", req.body);
 

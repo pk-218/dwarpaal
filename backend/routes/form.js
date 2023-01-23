@@ -14,7 +14,7 @@ const isLoggedIn = (req, res, next) => {
   }
 };
 
-formRouter.post("/submitform", isLoggedIn, submitForm);
+formRouter.post("/submit-form", isLoggedIn, submitForm);
 formRouter.post("/getforms", getForms);
 // formRouter.post('/submitform', submitForm);
 

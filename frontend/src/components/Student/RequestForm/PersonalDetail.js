@@ -5,60 +5,59 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const CustomFormTextfield = styled(TextField)({
-  '& .MuiOutlinedInput-root': {
-    '&.Mui-focused fieldset': {
+  "& .MuiOutlinedInput-root": {
+    "&.Mui-focused fieldset": {
       borderColor: "#284b63",
       borderWidth: "2px",
     },
   },
-})
+});
 
 const years = [
   {
-    value: 'b1',
-    label: 'BTech First Year'
+    value: "b1",
+    label: "BTech First Year",
   },
   {
-    value: 'b2',
-    label: 'BTech Second Year'
+    value: "b2",
+    label: "BTech Second Year",
   },
   {
-    value: 'b3',
-    label: 'BTech Third Year'
+    value: "b3",
+    label: "BTech Third Year",
   },
   {
-    value: 'b4',
-    label: 'BTech Final Year'
+    value: "b4",
+    label: "BTech Final Year",
   },
   {
-    value: 'm1',
-    label: 'MTech First Year'
+    value: "m1",
+    label: "MTech First Year",
   },
   {
-    value: 'm1',
-    label: 'MTech Second Year'
+    value: "m1",
+    label: "MTech Second Year",
   },
   {
-    value: 'mca1',
-    label: 'MCA First Year'
+    value: "mca1",
+    label: "MCA First Year",
   },
   {
-    value: 'mca2',
-    label: 'MCA Second Year'
+    value: "mca2",
+    label: "MCA Second Year",
   },
   {
-    value: 'phd',
-    label: 'PHD'
-  }
-]
+    value: "phd",
+    label: "PHD",
+  },
+];
 
 export default function PersonalDetail({ formData, setFormData }) {
-
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -74,7 +73,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             label="First name"
             placeholder="for e.g. John"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="given-name"
@@ -97,7 +96,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             label="Last name"
             placeholder="for e.g. Doe"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="family-name"
@@ -120,7 +119,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             labelId="yearOfStudyLabel"
             label="Year of Study"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="Year of Study"
@@ -148,7 +147,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             label="Project Title"
             placeholder="for e.g. dgx-project, project-dgx-1"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="Project Title"
@@ -160,7 +159,6 @@ export default function PersonalDetail({ formData, setFormData }) {
               });
             }}
             value={formData.projectTitle}
-
           />
         </Grid>
 
@@ -171,7 +169,7 @@ export default function PersonalDetail({ formData, setFormData }) {
             name="profInCharge"
             label="Professor In Charge"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="Prof Incharge"
@@ -192,9 +190,9 @@ export default function PersonalDetail({ formData, setFormData }) {
             id="fromdate"
             name="fromdate"
             label="From Date"
-            placeholder="dd/mm/yyyy"
+            placeholder="yyyy-mm-dd"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="From Date"
@@ -225,8 +223,6 @@ export default function PersonalDetail({ formData, setFormData }) {
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider> */}
-
-
         </Grid>
         <Grid item xs={12} sm={6}>
           <CustomFormTextfield
@@ -234,9 +230,9 @@ export default function PersonalDetail({ formData, setFormData }) {
             id="todate"
             name="todate"
             label="To Date"
-            placeholder="dd/mm/yyyy"
+            placeholder="yyyy-mm-dd"
             InputLabelProps={{
-              style: { color: '#284b63' },
+              style: { color: "#284b63" },
             }}
             fullWidth
             autoComplete="To Date"
@@ -250,7 +246,6 @@ export default function PersonalDetail({ formData, setFormData }) {
             value={formData.todate}
           />
         </Grid>
-
       </Grid>
     </React.Fragment>
   );

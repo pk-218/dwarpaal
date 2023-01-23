@@ -84,7 +84,7 @@ const formdata = (sequelize) => {
     },
     faculty_email: {
       type: Sequelize.STRING,
-      defaultValue: "dwarpal.vjti@gmail.com",
+      defaultValue: "pankajkk218@gmail.com",
     },
   });
 

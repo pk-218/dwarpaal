@@ -67,6 +67,7 @@ const StudentLoginForm = () => {
         console.log("clientId", res.data.clientId);
         localStorage.setItem("clientId", res.data.clientId);
         localStorage.setItem("hasLoggedInAsStudent", "true");
+        localStorage.setItem("hasSubmitted", "false");
       });
     navigate("/home");
     //   .then((res) => res.json())

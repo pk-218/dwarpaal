@@ -76,7 +76,10 @@ export default function Checkout() {
       //   config.headers['client-id'] = clientId;
       //   return config;
       // })
-      axios.post("/request-form/", formData);
+      console.log("Form data", formData);
+      axios.post("/forms/submit-form", formData).then((res) => {
+        console.log(res.status);
+      });
       localStorage.setItem("hasSubmitted", "true");
     }
   };
@@ -105,16 +108,16 @@ export default function Checkout() {
                     color: "#284b63", // circle color (COMPLETED)
                   },
                   "& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel":
-                  {
-                    color: "common.white", // Just text label (COMPLETED)
-                  },
+                    {
+                      color: "common.white", // Just text label (COMPLETED)
+                    },
                   "& .MuiStepLabel-root .Mui-active": {
                     color: "#8c8c8c", // circle color (ACTIVE)
                   },
                   "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel":
-                  {
-                    color: "common.white", // Just text label (ACTIVE)
-                  },
+                    {
+                      color: "common.white", // Just text label (ACTIVE)
+                    },
                   "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
                     fill: "white", // circle's number (ACTIVE)
                   },
