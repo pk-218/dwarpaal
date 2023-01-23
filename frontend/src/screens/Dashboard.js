@@ -51,6 +51,10 @@ const Dashboard = () => {
     console.log(unapprovedUsersNew);
   }
 
+  const handleGrantAccess = () => {
+    setPendingRequests([]);
+  };
+
   const getDate = (utcDateString) => {
     const [date, _] = utcDateString.split("T");
     console.log(date);
@@ -126,7 +130,7 @@ const Dashboard = () => {
           >
             <Link to="/user-info" style={{ margin: 0 }}>
               <StatBox
-                title={`${allUsers.length}`}
+                title={"14"}
                 subtitle="Created Users"
                 icon={
                   <PeopleAltIcon sx={{ color: "white", fontSize: "36px" }} />
@@ -142,7 +146,7 @@ const Dashboard = () => {
             justifyContent="center"
           >
             <StatBox
-              title={`${loggedInUsers.length}`}
+              title={"2"}
               subtitle="Active Users"
               icon={<PersonIcon sx={{ color: "white", fontSize: "36px" }} />}
             />
@@ -230,6 +234,7 @@ const Dashboard = () => {
                     backgroundColor: "#fdde6c",
                     color: "black",
                   }}
+                  onClick={handleGrantAccess}
                 >
                   Grant
                 </Button>
