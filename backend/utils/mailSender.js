@@ -44,8 +44,8 @@ function sendFacultyMail(email, student, cb) {
     from: process.env.MAILER_DOMAIN,
     to: email,
     subject: `Approve DGX access form of ${student.id}`,
-    text: `Please follow the link to accpet/reject the request of GDX server access for academic purpose by ${student.firstName} ${student.lastName} having email id ${student.email}
-            Link - ${process.env.SERVER_BASE_URL}/faculyConfirmation?id=${student.id}&token=${student.token}`,
+    text: `Please click on the following link to either accept or reject the request for GDX server access for academic purposes by ${student.firstName} ${student.lastName} with the email address ${student.email}.\n
+            Link - ${process.env.FRONTEND_SERVER_BASE_URL}/faculyConfirmation?id=${student.id}&token=${student.token}`,
   };
   sendMail(mailOptions, cb);
 }

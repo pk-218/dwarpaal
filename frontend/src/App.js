@@ -17,7 +17,7 @@ function App() {
   const hasLoggedInAsStudent = JSON.parse(
     localStorage.getItem("hasLoggedInAsStudent")
   );
-  console.log(hasLoggedInAsStudent)
+  console.log(hasLoggedInAsStudent);
 
   return (
     <Router>
@@ -35,7 +35,10 @@ function App() {
             <Route path="/home" element={<Homepage />} />
             <Route path="/request-form" element={<RequestForm />} />
             <Route path="/faq" element={<FAQ />} />
-            <Route path="/fcon" element={<FacultyConfirmation />} />
+            <Route
+              path="/faculyConfirmation"
+              element={<FacultyConfirmation />}
+            />
           </Routes>
         )}
 
