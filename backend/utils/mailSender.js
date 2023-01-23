@@ -50,4 +50,18 @@ function sendFacultyMail(email, student, cb) {
   sendMail(mailOptions, cb);
 }
 
-export { sendOTPMail, sendFacultyMail };
+function grantAccessMail(email = "pkkhushalani_b19@it.vjti.ac.in", cb) {
+  const mailOptions = {
+    from: process.env.MAILER_DOMAIN,
+    to: email,
+    subject: `Approval of DGX Access`,
+    text: `Your access request has been accepted!\n
+            Your user credentials are\n
+            Username : pkkhushalani_b19\n
+            Password : password\n
+            The DGX host IP is 170.187.251.66 `,
+  };
+  sendMail(mailOptions, cb);
+}
+
+export { sendOTPMail, sendFacultyMail, grantAccessMail };

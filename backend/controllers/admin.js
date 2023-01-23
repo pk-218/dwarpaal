@@ -1,6 +1,7 @@
 import { NodeSSH } from "node-ssh";
 import { generatePassword } from "../utils/createPassword.js";
 import { db } from "../utils/sqlConfig.js";
+import { grantAccessMail } from "../utils/mailSender.js";
 const ssh = new NodeSSH();
 
 const VM_CONFIG = {
@@ -156,6 +157,22 @@ const getPendingAccessRequests = async (_, res) => {
   }
 };
 
+const grantCredentials = async (_, res) => {
+  console.log("Mail Send!");
+  grantAccessMail("pkkhushalani_b19@it.vjti.ac.in", (err, result) => {
+    if (result) {
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "Grant Access mail send successfully!",
+        });
+    } else {
+      res.status(500).json({ success: false, error: err });
+    }
+  });
+};
+
 export default {
   getAllUsers,
   getLoggedInUsers,
@@ -164,4 +181,5 @@ export default {
   diskOccupied,
   deleteUser,
   getPendingAccessRequests,
+  grantCredentials,
 };
