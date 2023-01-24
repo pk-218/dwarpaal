@@ -32,58 +32,14 @@ const Dashboard = () => {
     "abcat_b19",
   ];
 
-  async function GAU() {
-    var as = await axios
-      .get("http://localhost:5000/api/admin/get-all-users")
-      .then((res) => {
-        setAllUsers(res.data);
-      });
-    return as;
-  }
-
-  async function LIU() {
-    return await axios
-      .get("http://localhost:5000/api/admin/get-logged-in-users")
-      .then((res) => {
-        setLoggedInUsers(res.data);
-      });
-  }
-
-  async function MUPU() {
-    return await axios
-      .get("http://localhost:5000/api/admin/memory-usage-per-user")
-      .then((res) => {
-        setMemoryUsage(res.data);
-        for (var i = 0; i < res.data.length; i++) {
-          nums.push(res.data[i]["total_mem_usage"]);
-          labels.push(res.data[i]["username"]);
-        }
-        console.log(nums, labels);
-      });
-  }
-
-  async function DO() {
-    return await axios
-      .get("http://localhost:5000/api/admin/disk-occupied")
-      .then((res) => {
-        setDiskOccupied(res.data);
-      });
-  }
-
   useEffect(() => {
-    setTimeout(() => {
-      GAU();
-    }, 0);
-    setTimeout(() => {
-      LIU();
-    }, 4000);
-    setTimeout(() => {
-      MUPU();
-    }, 8000);
-    setTimeout(() => {
-      DO();
-    }, 12000);
+    axios.get("http://localhost:8000/api/admin/get-stats").then((res) => {
+        console.log(JSON.parse(res.data[0]))
+        console.log(JSON.parse(res.data[1]))
+        console.log(JSON.parse(res.data[2]))
+      });
   }, []);
+
   return (
     <>
       <Box m="20px" p="20px" className="title">

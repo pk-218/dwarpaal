@@ -13,7 +13,7 @@ import { useState } from "react";
 import FAQ from "./screens/FAQ";
 
 function App() {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
 
   return (
     <Router>

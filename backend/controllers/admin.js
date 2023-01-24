@@ -53,67 +53,42 @@ const deleteUser = (req, res) => {
     });
 };
 
-const getAllUsers = (req, res) => {
+const getStats = (req,res) => {
+  var stats = []
   ssh.connect(VM_CONFIG).then(function () {
-    ssh
-      .execCommand(
+    ssh.execCommand(
         `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${all_users}' --json;`,
         { cwd: "./" }
       )
       .then(function (result) {
-        ssh.dispose();
-        res.send(JSON.parse(result.stdout));
-      });
-  });
-};
+        stats.push(result.stdout)
+        ssh.execCommand(
+          `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${memory_usage_per_user}' --json;`,
+          { cwd: "./" }
+        )
+        .then(function (result) {
+          stats.push(result.stdout)
+          ssh.execCommand(
+            `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${logged_in_users}' --json;`,
+            { cwd: "./" }
+          )
+          .then(function (result) {
+            stats.push(result.stdout)
+            ssh.dispose();
+            res.send(stats);
+          });
 
-const getLoggedInUsers = (req, res) => {
-  ssh.connect(VM_CONFIG).then(function () {
-    ssh
-      .execCommand(
-        `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${logged_in_users}' --json;`,
-        { cwd: "./" }
-      )
-      .then(function (result) {
-        ssh.dispose();
-        res.send(JSON.parse(result.stdout));
-      });
-  });
-};
+        });
 
-const memoryUsagePerUser = (req, res) => {
-  ssh.connect(VM_CONFIG).then(function () {
-    ssh
-      .execCommand(
-        `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${memory_usage_per_user}' --json;`,
-        { cwd: "./" }
-      )
-      .then(function (result) {
-        ssh.dispose();
-        res.send(JSON.parse(result.stdout));
       });
+  }, function(error) {
+    console.log("Something's wrong")
+    console.log(error)
   });
-};
-
-const diskOccupied = (req, res) => {
-  ssh.connect(VM_CONFIG).then(function () {
-    ssh
-      .execCommand(
-        `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${disk_occupied}' --json;`,
-        { cwd: "./" }
-      )
-      .then(function (result) {
-        ssh.dispose();
-        res.send(JSON.parse(result.stdout));
-      });
-  });
-};
+}
 
 export default {
-  getAllUsers,
-  getLoggedInUsers,
-  memoryUsagePerUser,
   createUser,
-  diskOccupied,
   deleteUser,
+  getStats
 };
