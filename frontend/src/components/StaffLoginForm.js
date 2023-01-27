@@ -1,12 +1,6 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+import { Avatar, Box, Button, Container, CssBaseline, Paper, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { styled } from '@mui/material/styles';
 import Copyright from './Copyright'
 
@@ -40,72 +34,85 @@ export default function SignIn() {
 
     return (
         <>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
+            <CssBaseline />
+            <Container maxWidth="sm"
+                sx={{
+                    marginTop: 12,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}
+            >
+                <Paper
+                    variant="outlined"
+                    sx={{ p: { xs: 2, md: 3 } }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: '#284b63' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
 
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                        <CustomFormTextfield
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            placeholder="jwdoe_b23@it.vjti.ac.in"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                            InputLabelProps={{
-                                style: { color: '#284b63' },
-                            }}
-                        />
-                        <CustomFormTextfield
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            placeholder="********"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            InputLabelProps={{
-                                style: { color: '#284b63' },
-                            }}
-                        />
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Avatar sx={{ m: 1, bgcolor: '#284b63' }}>
+                            <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
+                            Sign in
+                        </Typography>
 
-                        <FormButtonContained
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Sign In
-                        </FormButtonContained>
+                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                            <CustomFormTextfield
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                placeholder="jwdoe_b23@it.vjti.ac.in"
+                                name="email"
+                                autoComplete="email"
+                                autoFocus
+                                InputLabelProps={{
+                                    style: { color: '#284b63' },
+                                }}
+                            />
+                            <CustomFormTextfield
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                placeholder="********"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                InputLabelProps={{
+                                    style: { color: '#284b63' },
+                                }}
+                            />
 
-                        {/* The following consists the Forgot password link */}
-                        {/* <Grid item xs>
+                            <FormButtonContained
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Sign In
+                            </FormButtonContained>
+
+                            {/* The following consists the Forgot password link */}
+                            {/* <Grid item xs>
                             <Link href="#" variant="body2">
                                 Forgot password?
                             </Link>
                         </Grid> */}
+                        </Box>
                     </Box>
-                </Box>
-                <Copyright />
-            </Container>
+                </Paper>
+            </Container >
+            <Copyright />
         </>
     );
 }

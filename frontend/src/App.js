@@ -36,7 +36,7 @@ function App() {
             <Route path="/request-form" element={<RequestForm />} />
             <Route path="/faq" element={<FAQ />} />
             <Route
-              path="/faculyConfirmation"
+              path="/faculty-confirmation"
               element={<FacultyConfirmation />}
             />
           </Routes>

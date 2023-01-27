@@ -1,9 +1,9 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import {
   Box,
   Button,
   Container,
+  CssBaseline,
   Paper,
   Step,
   Stepper,
@@ -12,9 +12,9 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import PersonalDetail from "../components/Student/RequestForm/PersonalDetail";
-import PaymentForm from "../components/Student/RequestForm/SystemRequirement";
-import Review from "../components/Student/RequestForm/Review";
+import PersonalDetail from "../components/RequestForm/PersonalDetail";
+import PaymentForm from "../components/RequestForm/SystemRequirement";
+import Review from "../components/RequestForm/Review";
 import Copyright from "../components/Copyright";
 import { useState } from "react";
 import axios from "axios";
@@ -108,16 +108,16 @@ export default function Checkout() {
                     color: "#284b63", // circle color (COMPLETED)
                   },
                   "& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel":
-                    {
-                      color: "common.white", // Just text label (COMPLETED)
-                    },
+                  {
+                    color: "common.white", // Just text label (COMPLETED)
+                  },
                   "& .MuiStepLabel-root .Mui-active": {
                     color: "#8c8c8c", // circle color (ACTIVE)
                   },
                   "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel":
-                    {
-                      color: "common.white", // Just text label (ACTIVE)
-                    },
+                  {
+                    color: "common.white", // Just text label (ACTIVE)
+                  },
                   "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
                     fill: "white", // circle's number (ACTIVE)
                   },
