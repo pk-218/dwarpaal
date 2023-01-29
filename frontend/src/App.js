@@ -11,6 +11,7 @@ import { useState } from "react";
 import FAQ from "./screens/FAQ";
 import LandingPage from "./screens/LandingPage";
 import Homepage from "./screens/Homepage";
+import AboutUs from "./screens/AboutUs";
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -35,6 +36,7 @@ function App() {
             <Route path="/home" element={<Homepage />} />
             <Route path="/request-form" element={<RequestForm />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/about" element={<AboutUs />} />
             <Route
               path="/faculty-confirmation"
               element={<FacultyConfirmation />}
