@@ -109,12 +109,12 @@ const sendCode = (req, res) => {
   console.log("Verification code:", verificationCode);
 
   sendOTPMail(email, verificationCode, (err, result) => {
-    if (result) {
+    if (!result) {
       res
-        .status(200)
+        .status(554)
         .json({
           error: err,
-          message: "Verification code sent to email faileds",
+          message: "Error in sending mail!",
         });
     } else {
       res.status(200).json({ message: "Verification code sent to email" });
