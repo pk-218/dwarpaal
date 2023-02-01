@@ -13,11 +13,11 @@ function sendMail(mailOptions, cb) {
   transporter.sendMail(mailOptions, (err) => {
     if (err) {
       console.log(err);
-      if (!cb) {
+      if (cb) {
         cb(err, false);
       }
     } else {
-      if (!cb) {
+      if (cb) {
         cb(null, true);
       }
     }
