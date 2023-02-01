@@ -1,17 +1,12 @@
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.mailgun.org", // hostname
-  secureConnection: false, // use SSL
-  port: 587, // port for secure SMTP
+  service: "gmail",
   auth: {
     // type: 'OAuth2',
     user: process.env.MAILER_DOMAIN,
     pass: process.env.MAILER_PASSWORD,
-  },
-  tls: {
-    ciphers: "SSLv3",
-  },
+  }
 });
 
 function sendMail(mailOptions, cb) {
