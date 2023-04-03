@@ -1,28 +1,21 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
-// import { tokens } from "../../theme";
+import { useEffect, useState } from "react";
+import { Box, Button, Typography } from "@mui/material";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import StorageIcon from "@mui/icons-material/Storage";
 import StatBox from "../components/StatBox";
-import { mockTransactions } from "../data/mockData";
-import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-
+import Copyright from "../components/Copyright";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { chartColours } from "./colours";
-
 import "../App.css";
+import PieChart from "../components/PieChart";
 
 const Dashboard = () => {
-  ChartJS.register(ArcElement, Tooltip, Legend);
-  // const theme = useTheme();
-  // const colors = tokens(theme.palette.mode);
   const [allUsers, setAllUsers] = useState([]);
   const [loggedInUsers, setLoggedInUsers] = useState([]);
   const [memoryUsage, setMemoryUsage] = useState([]);
   const [diskOccupied, setDiskOccupied] = useState([]);
+  const [pendingRequests, setPendingRequests] = useState([]);
   var nums = [145.87, 223.8, 111.34, 45, 65.6];
   var labels = [
     "pkkhushalani_b19",
@@ -30,19 +23,93 @@ const Dashboard = () => {
     "cmbaghele_b19",
     "psthakare_b19",
     "abcat_b19",
+    "dsghosh_b19",
   ];
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/admin/get-stats").then((res) => {
-        console.log(JSON.parse(res.data[0]))
-        console.log(JSON.parse(res.data[1]))
-        console.log(JSON.parse(res.data[2]))
-      });
+    getPendingAccessRequests();
   }, []);
 
+  async function getPendingAccessRequests() {
+    const res = await axios.get("/admin/pending-requests");
+    const unapprovedUsersNew = [];
+    console.log(unapprovedUsersNew);
+    unapprovedUsersNew.push({
+      id: "191080040",
+      email: "pkkhushalani_b19",
+      to_date: "2023-02-20",
+      is_approved: false,
+    });
+    // const unapprovedUsersNew = unapprovedUsers.map((user, _) => {
+    //   return {
+    //     ...user,
+    //     to_date: getDate(user.to_date),
+    //     email: getUsername(user.email),
+    //   };
+    // });
+    setPendingRequests(unapprovedUsersNew);
+    console.log(unapprovedUsersNew);
+  }
+
+  const handleGrantAccess = () => {
+    setPendingRequests([]);
+  };
+
+  const getDate = (utcDateString) => {
+    const [date, _] = utcDateString.split("T");
+    console.log(date);
+    return date;
+  };
+
+  const getUsername = (email) => {
+    const [username, _] = email.split("@");
+    console.log(username);
+    return username;
+  };
+
+  async function getAllUsers() {
+    const users = await axios.get("/admin/get-all-users");
+    setAllUsers(users.data);
+  }
+
+  async function getLoggedInUsers() {
+    const users = await axios.get("/admin/get-logged-in-users");
+    setLoggedInUsers(users.data);
+  }
+
+  // async function getMemoryUsagePerUser() {
+  //   const memoryUsage = await axios.get("/admin/memory-usage-per-user");
+  //   for (var i = 0; i < memoryUsage.data.length; i++) {
+  //     nums.push(res.data[i]["total_mem_usage"]);
+  //     labels.push(res.data[i]["username"]);
+  //   }
+  //   console.log(nums, labels);
+  //   setMemoryUsage(memoryUsage.data);
+  // }
+
+  async function getDiskOccupied() {
+    await axios.get("/admin/disk-occupied").then((res) => {
+      setDiskOccupied(res.data);
+    });
+  }
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     getAllUsers();
+  //   }, 0);
+  //   setTimeout(() => {
+  //     getLoggedInUsers();
+  //   }, 4000);
+  //   setTimeout(() => {
+  //     getMemoryUsagePerUser();
+  //   }, 8000);
+  //   setTimeout(() => {
+  //     getDiskOccupied();
+  //   }, 12000);
+  // }, []);
   return (
     <>
-      <Box m="20px" p="20px" className="title">
+      <Box m="20px" className="title py-2">
         VM Usage Statistics
       </Box>
       <Box m="20px">
@@ -61,9 +128,9 @@ const Dashboard = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <Link to="/dashboard/grid" style={{ margin: 0 }}>
+            <Link to="/user-info" style={{ margin: 0 }}>
               <StatBox
-                title={`${allUsers.length}`}
+                title={"14"}
                 subtitle="Created Users"
                 icon={
                   <PeopleAltIcon sx={{ color: "white", fontSize: "36px" }} />
@@ -79,7 +146,7 @@ const Dashboard = () => {
             justifyContent="center"
           >
             <StatBox
-              title={`${loggedInUsers.length}`}
+              title={"2"}
               subtitle="Active Users"
               icon={<PersonIcon sx={{ color: "white", fontSize: "36px" }} />}
             />
@@ -101,46 +168,30 @@ const Dashboard = () => {
           {/* ROW 2 */}
           <Box gridColumn="span 8" gridRow="span 3" backgroundColor="#353535">
             <Box
-              mt="25px"
-              p="0 30px"
-              display="flex "
-              justifyContent="space-between"
-              alignItems="center"
+              sx={{
+                mt: 3,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "relative",
+              }}
             >
               <Box>
-                <Typography variant="h5" fontWeight="600" color="white">
+                <Typography
+                  variant="h5"
+                  fontWeight="600"
+                  color="white"
+                  position="absolute"
+                  left="0"
+                  marginLeft="30px"
+                >
                   Memory in Use
                 </Typography>
-                <Box justifyItems="flex-end" p="0 225px" mb="100px">
-                  <Pie
-                    data={{
-                      labels: labels,
-                      maintainAspectRatio: false,
-                      responsive: true,
-                      datasets: [
-                        {
-                          data: nums,
-                          backgroundColor: chartColours,
-                          hoverBackgroundColor: chartColours,
-                        },
-                      ],
-                    }}
-                    options={{
-                      legend: {
-                        display: false,
-                        position: "right",
-                      },
-                      elements: {
-                        arc: {
-                          borderWidth: 0,
-                        },
-                      },
-                    }}
-                  />
+                <Box sx={{ mt: 8 }}>
+                  <PieChart labels={labels} data={nums} />
                 </Box>
               </Box>
             </Box>
-            <Box height="240px" m="-20px 0 0 0"></Box>
           </Box>
           <Box
             gridColumn="span 4"
@@ -160,9 +211,9 @@ const Dashboard = () => {
                 Recent Access Requests
               </Typography>
             </Box>
-            {mockTransactions.map((transaction, i) => (
+            {pendingRequests.map((request, i) => (
               <Box
-                key={`${transaction.txId}-${i}`}
+                key={`${request.id}-${i}`}
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
@@ -171,19 +222,29 @@ const Dashboard = () => {
               >
                 <Box>
                   <Typography color="#fdde6c" variant="h5" fontWeight="600">
-                    {transaction.txId}
+                    {request.id}
                   </Typography>
-                  <Typography color="white">{transaction.user}</Typography>
+                  <Typography color="white">{request.email}</Typography>
                 </Box>
-                <Box color="white">{transaction.date}</Box>
-                <Box backgroundColor="#fdde6c" p="5px 10px" borderRadius="4px">
-                  {transaction.cost}
-                </Box>
+                <Box color="white">{request.to_date}</Box>
+                <Button
+                  className="py-2 px-4"
+                  style={{
+                    borderRadius: "4px",
+                    backgroundColor: "#fdde6c",
+                    color: "black",
+                  }}
+                  onClick={handleGrantAccess}
+                >
+                  Grant
+                </Button>
               </Box>
             ))}
           </Box>
         </Box>
       </Box>
+
+      <Copyright />
     </>
   );
 };

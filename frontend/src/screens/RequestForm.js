@@ -1,32 +1,23 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
-import Typography from "@mui/material/Typography";
-import { alpha, styled } from "@mui/material/styles";
-import PersonalDetail from "../components/Student/RequestForm/PersonalDetail";
-import PaymentForm from "../components/Student/RequestForm/SystemRequirement";
-import Review from "../components/Student/RequestForm/Review";
+import {
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  Paper,
+  Step,
+  Stepper,
+  StepLabel,
+  Typography,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import PersonalDetail from "../components/RequestForm/PersonalDetail";
+import PaymentForm from "../components/RequestForm/SystemRequirement";
+import Review from "../components/RequestForm/Review";
+import Copyright from "../components/Copyright";
 import { useState } from "react";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Dwarpal
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import axios from "axios";
 
 const steps = ["Project Details", "System Requirements", "Form Confirmation"];
 
@@ -45,7 +36,8 @@ export default function Checkout() {
     lastName: "",
     yearOfStudy: "",
     profInCharge: "",
-    period: "",
+    fromDate: "",
+    toDate: "",
     projectTitle: "",
     domain: "",
     reqGPU: "",
@@ -61,8 +53,6 @@ export default function Checkout() {
     containerVersions: "",
   });
 
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
   function getStepContent(step) {
     switch (step) {
       case 0:
@@ -76,22 +66,22 @@ export default function Checkout() {
     }
   }
 
-  // const formSubmission = () => {
-  //   setFormSubmitted(true)
-  //   return (
-  //     <React.Fragment>
-  //       <Typography variant="h5" gutterBottom>
-  //         Your access form has been submitted.
-  //       </Typography>
-  //       <Typography variant="subtitle1">
-  //         You will receive your credentials within 3-5 working days. Do check the notifications for an early announcement.
-  //       </Typography>
-  //     </React.Fragment>
-  //   )
-  // }
-
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    if (activeStep == steps.length - 1) {
+      console.log("form submitted successfully ! ");
+      // axios.interceptors.request.use(config=>{
+      //   const clientId = localStorage.getItem('clientId');
+      //   console.log("Locale client",clientId);
+      //   config.headers['client-id'] = clientId;
+      //   return config;
+      // })
+      console.log("Form data", formData);
+      axios.post("/forms/submit-form", formData).then((res) => {
+        console.log(res.status);
+      });
+      localStorage.setItem("hasSubmitted", "true");
+    }
   };
 
   const handleBack = () => {
@@ -106,7 +96,7 @@ export default function Checkout() {
           variant="outlined"
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
         >
-          <Typography component="h1" variant="h4" align="center">
+          <Typography variant="h3" className="py-3" align="center">
             DGX Application
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
@@ -118,16 +108,16 @@ export default function Checkout() {
                     color: "#284b63", // circle color (COMPLETED)
                   },
                   "& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel":
-                    {
-                      color: "common.white", // Just text label (COMPLETED)
-                    },
+                  {
+                    color: "common.white", // Just text label (COMPLETED)
+                  },
                   "& .MuiStepLabel-root .Mui-active": {
                     color: "#8c8c8c", // circle color (ACTIVE)
                   },
                   "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel":
-                    {
-                      color: "common.white", // Just text label (ACTIVE)
-                    },
+                  {
+                    color: "common.white", // Just text label (ACTIVE)
+                  },
                   "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
                     fill: "white", // circle's number (ACTIVE)
                   },
@@ -148,6 +138,13 @@ export default function Checkout() {
               <Typography variant="subtitle1">
                 We will send you an email if your request has any update.
               </Typography>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Link to="/home">
+                  <FormButtonContained variant="contained" sx={{ mt: 3 }}>
+                    Return Home
+                  </FormButtonContained>
+                </Link>
+              </Box>
             </React.Fragment>
           ) : (
             <React.Fragment>
@@ -173,6 +170,7 @@ export default function Checkout() {
             </React.Fragment>
           )}
         </Paper>
+
         <Copyright />
       </Container>
     </>

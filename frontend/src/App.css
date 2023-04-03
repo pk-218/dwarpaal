@@ -1,13 +1,60 @@
-html,
+/* html,
 body {
   height: 100%;
-}
+} */
 
 a:hover,
 a:visited,
 a:link,
 a:active {
   text-decoration: none;
+}
+
+.hero-section {
+  height: 86vh;
+}
+
+.lhs-hero-section {
+  float: left;
+  width: 60%;
+  background-color: #284b63;
+  color: white;
+}
+
+.lhs-hero {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 86vh;
+  margin-left: 30px;
+}
+
+.lhs-btn-container-row {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.lhs-btn-container-column {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lhs-btn {
+  width: 250px;
+}
+
+.rhs-hero-section {
+  float: right;
+  width: 40%;
+  background: url(./images/dgx-a100.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+
+.footer-link a {
+  color: #284b63;
 }
 
 .login-container {
@@ -43,7 +90,6 @@ input[type="number"] {
 }
 
 .header-branding {
-
   padding: 11px;
   background-color: #284b63;
   color: white;
@@ -63,6 +109,7 @@ input[type="number"] {
   font-size: 2rem;
   font-weight: bolder;
 }
+
 .navbar-link {
   font-size: large;
   color: white;
@@ -73,7 +120,49 @@ input[type="number"] {
   color: aliceblue;
 }
 
-/* .navbar-link:active {
+.navbar-link:focus {
   font-size: large;
   color: aliceblue;
-} */
+}
+
+code {
+  /* use if theme for CopyBlock is paraisoLight or monoBlue */
+  /* color: #284b63; */
+  /* use if theme for CopyBlock is sunburst */
+  color: powderblue;
+}
+
+.code-block {
+  font-family: 'Fira Mono', monospace;
+}
+
+.ordered-list {
+  font-size: medium;
+  line-height: 1.7em;
+}
+
+.navbar-toggler {
+  border-color: white;
+  background-color: white;
+}
+
+.navbar-toggler:hover {
+  border-color: aliceblue;
+  background-color: aliceblue;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.picture {
+  background: url(./images/dgx-a100.jpg) no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  left: calc(40% - 122px);
+  /* need to add media queries so that image looks presentable */
+  top: calc(40% - 100px);
+  /* need to add media queries so that image looks presentable */
+  width: 500px;
+  height: 250px;
+}

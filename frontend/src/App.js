@@ -1,24 +1,29 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Header from "./components/Header";
-import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HomeScreen from "./screens/HomeScreen";
 import StudentLoginForm from "./components/StudentLoginForm";
 import StaffLoginForm from "./components/StaffLoginForm";
 import Dashboard from "./screens/Dashboard";
 import UserInfoGrid from "./components/UserInfoGrid";
-import Checkout from "./screens/CheckOut";
+import RequestForm from "./screens/RequestForm";
+import FacultyConfirmation from "./screens/FacultyConfirmation";
 import { useState } from "react";
 import FAQ from "./screens/FAQ";
+import LandingPage from "./screens/LandingPage";
+import Homepage from "./screens/Homepage";
+import AboutUs from "./screens/AboutUs";
 
 function App() {
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const hasLoggedInAsStudent = JSON.parse(
+    localStorage.getItem("hasLoggedInAsStudent")
+  );
+
+  console.log(hasLoggedInAsStudent);
 
   return (
     <Router>
-      <Header />
-      <Container>
+      <>
         {isAdmin ? (
           <Routes>
             <Route path="/" element={<Dashboard />} />
@@ -26,14 +31,35 @@ function App() {
           </Routes>
         ) : (
           <Routes>
-            <Route path="/" element={<HomeScreen />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login/student" element={<StudentLoginForm />} />
             <Route path="/login/staff" element={<StaffLoginForm />} />
-            <Route path="/request-form" element={<Checkout />} />
+            <Route path="/home" element={<Homepage />} />
+            <Route path="/request-form" element={<RequestForm />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route
+              path="/faculty-confirmation"
+              element={<FacultyConfirmation />}
+            />
           </Routes>
         )}
-      </Container>
+
+        {/* {hasLoggedInAsStudent ?
+          <Routes>
+            <Route path='/home' element={<Homepage />} />
+            <Route path='/request-form' element={<RequestForm />} />
+            <Route path='/faq' element={<FAQ />} />
+          </Routes>
+          :
+          <Routes>
+            <Route path='/' element={<LandingPage />} />
+            <Route path='/login/student' element={<StudentLoginForm />} />
+            <Route path='/login/staff' element={<StaffLoginForm />} />
+          </Routes>
+        } */}
+      </>
     </Router>
   );
 }

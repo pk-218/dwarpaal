@@ -1,5 +1,4 @@
 import Sequelize, { DataTypes } from "sequelize";
-
 const user = (sequelize) => {
   const User = sequelize.define("users", {
     id: {
@@ -37,5 +36,4 @@ const user = (sequelize) => {
 
   return User;
 };
-
 export default user;

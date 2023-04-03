@@ -1,6 +1,7 @@
 import { NodeSSH } from "node-ssh";
-import generatePassword from "../utils/createPassword.js";
+import { generatePassword } from "../utils/createPassword.js";
 import { db } from "../utils/sqlConfig.js";
+import { grantAccessMail } from "../utils/mailSender.js";
 const ssh = new NodeSSH();
 
 const VM_CONFIG = {
@@ -15,7 +16,6 @@ const all_users =
   'select * from users where username like "%\\_b%" escape "\\";';
 const logged_in_users =
   'select * from logged_in_users where user like "%\\_b%" escape "\\";';
-
 const createUser = (req, res) => {
   const id = req.body.id;
   const username = req.body.email.split("@")[0];
@@ -53,42 +53,109 @@ const deleteUser = (req, res) => {
     });
 };
 
-const getStats = (req,res) => {
-  var stats = []
-  ssh.connect(VM_CONFIG).then(function () {
-    ssh.execCommand(
-        `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${all_users}' --json;`,
-        { cwd: "./" }
-      )
-      .then(function (result) {
-        stats.push(result.stdout)
-        ssh.execCommand(
-          `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${memory_usage_per_user}' --json;`,
+const getStats = (req, res) => {
+  var stats = [];
+  ssh.connect(VM_CONFIG).then(
+    function () {
+      ssh
+        .execCommand(
+          `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${all_users}' --json;`,
           { cwd: "./" }
         )
         .then(function (result) {
-          stats.push(result.stdout)
-          ssh.execCommand(
-            `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${logged_in_users}' --json;`,
-            { cwd: "./" }
-          )
-          .then(function (result) {
-            stats.push(result.stdout)
-            ssh.dispose();
-            res.send(stats);
-          });
-
+          stats.push(result.stdout);
+          ssh
+            .execCommand(
+              `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${memory_usage_per_user}' --json;`,
+              { cwd: "./" }
+            )
+            .then(function (result) {
+              stats.push(result.stdout);
+              ssh
+                .execCommand(
+                  `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${logged_in_users}' --json;`,
+                  { cwd: "./" }
+                )
+                .then(function (result) {
+                  stats.push(result.stdout);
+                  ssh.dispose();
+                  res.send(stats);
+                });
+            });
         });
+    },
+    function (error) {
+      console.log("Something's wrong");
+      console.log(error);
+    }
+  );
+};
 
+const getPendingAccessRequests = async (_, res) => {
+  console.log("Fetching unapproved users from the database");
+  try {
+    const unapprovedUsers = await db.form.findAll({
+      attributes: [
+        "id",
+        "email",
+        "firstName",
+        "lastName",
+        "to_date",
+        "is_approved",
+      ],
+      where: {
+        is_approved: false,
+      },
+    });
+
+    const count = unapprovedUsers.length;
+    console.log("Count: ", count);
+    if (count == 0) {
+      console.log("No users found");
+      res.status(200).json({
+        count: 0,
+        data: {
+          id: "",
+          email: "",
+          firstName: "",
+          lastName: "",
+          to_date: "",
+          is_approved: "",
+        },
+        message: "No pending user access requests found",
       });
-  }, function(error) {
-    console.log("Something's wrong")
-    console.log(error)
+    } else {
+      console.log("Found users");
+      console.log(unapprovedUsers);
+      console.log(count);
+      res.status(200).send({
+        count: count,
+        data: unapprovedUsers,
+        message: "Several user access requests are pending",
+      });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const grantCredentials = async (_, res) => {
+  console.log("Mail Send!");
+  grantAccessMail("pkkhushalani_b19@it.vjti.ac.in", (err, result) => {
+    if (result) {
+      res.status(200).json({
+        success: true,
+        message: "Grant Access mail send successfully!",
+      });
+    } else {
+      res.status(500).json({ success: false, error: err });
+    }
   });
-}
+};
 
 export default {
   createUser,
   deleteUser,
-  getStats
+  getPendingAccessRequests,
+  grantCredentials,
 };

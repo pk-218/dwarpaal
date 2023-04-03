@@ -29,6 +29,7 @@ export default function PaymentForm({ formData, setFormData }) {
               style: { color: "#284b63" },
             }}
             fullWidth
+            type="number"
             autoComplete="cc-name"
             variant="outlined"
             onChange={(e) => {
@@ -69,6 +70,7 @@ export default function PaymentForm({ formData, setFormData }) {
               style: { color: "#284b63" },
             }}
             fullWidth
+            type="number"
             autoComplete="cc-name"
             variant="outlined"
             onChange={(e) => {
@@ -83,21 +85,22 @@ export default function PaymentForm({ formData, setFormData }) {
         <Grid item xs={12} md={6}>
           <FormTextfield
             required
-            id="reqCUDACores"
+            id="reqCudaCores"
             label="No of  CUDA cores Required"
             InputLabelProps={{
               style: { color: "#284b63" },
             }}
             fullWidth
+            type="number"
             autoComplete="cc-name"
             variant="outlined"
             onChange={(e) => {
               setFormData({
                 ...formData,
-                reqCPU: e.target.value,
+                reqCudaCores: e.target.value,
               });
             }}
-            value={formData.reqCPU}
+            value={formData.reqCudaCores}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -110,6 +113,7 @@ export default function PaymentForm({ formData, setFormData }) {
             }}
             fullWidth
             autoComplete="cc-name"
+            type="number"
             variant="outlined"
             onChange={(e) => {
               setFormData({
@@ -130,6 +134,7 @@ export default function PaymentForm({ formData, setFormData }) {
             }}
             fullWidth
             autoComplete="cc-name"
+            type="number"
             variant="outlined"
             onChange={(e) => {
               setFormData({
