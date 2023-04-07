@@ -16,11 +16,6 @@ func main() {
 
 	controller := controllers.NewControllersInstance(models.NewOsqueryClient(viper.GetString("SOCKET_PATH")))
 
-	// e.GET("/", func(c echo.Context) error {
-	// 	return c.String(http.StatusOK, "Hello, World!")
-	// })
-	// e.Logger.Fatal(e.Start(":1323"))
-
 	s := router.Init(context.Background(), viper.GetInt("PORT"), controller)
 	s.Run()
 }
