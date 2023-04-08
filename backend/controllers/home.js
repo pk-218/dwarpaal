@@ -25,25 +25,27 @@ const getDate = (utcDate) => {
 };
 
 const getAccessRequestStatus = async (req, res) => {
-  console.log(`Sending access request status for ${req.session.user.email}`);
+  // console.log(`Sending access request status for ${req.session.user.email}`);
   try {
     const userFormData = await Form.findOne({
       where: {
-        email: req.session.user.email,
+        email: "cmbaghele_b19@it.vjti.ac.in" || req.session.user.email,
       },
     });
     res.status(200).json({
-      message: `Found user form data for user ${req.session.user.email}`,
+      // message: `Found user form data for user ${req.session.user.email}`,
       profInCharge: userFormData.profInCharge,
       title: userFormData.title,
-      createdAt: getDate(userFormData.createdAt),
-      is_approved: userFormData.is_approved,
-      faculty_pending_status: userFormData.faculty_pending_status,
-      period: `${getDate(userFormData.from_date)}-${getDate(
-        userFormData.to_date
-      )}}`,
+      // createdAt: getDate(userFormData.createdAt),
+      // is_approved: userFormData.is_approved,
+      // faculty_pending_status: userFormData.faculty_pending_status,
+      // period: `${getDate(userFormData.from_date)}-${getDate(
+      //   userFormData.to_date
+      // )}}`,
     });
-  } catch {
+    console.log("User form data - ", userFormData);
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ message: "User not found" });
   }
 };

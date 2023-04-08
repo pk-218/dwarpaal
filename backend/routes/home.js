@@ -3,12 +3,13 @@ import { getAccessRequestStatus, getData } from "../controllers/home.js";
 const homeRouter = Router();
 
 // ??
-const isLoggedIn = (req, res) => {
+const isLoggedIn = (req, res, next) => {
+  console.log("Res", req.session.user);
   if (req.session.user == null) {
-    console.log("User not logged in");
-    return false;
+    res.status(401).send({ sucess: false, message: "User not loggedIN!" });
+  } else {
+    next();
   }
-  return true;
 };
 
 homeRouter.get("/", isLoggedIn, getData);
