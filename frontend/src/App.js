@@ -11,12 +11,14 @@ import { useState } from "react";
 import FAQ from "./screens/FAQ";
 import LandingPage from "./screens/LandingPage";
 import Homepage from "./screens/Homepage";
+import AboutUs from "./screens/AboutUs";
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const hasLoggedInAsStudent = JSON.parse(
     localStorage.getItem("hasLoggedInAsStudent")
   );
+
   console.log(hasLoggedInAsStudent);
 
   return (
@@ -30,11 +32,13 @@ function App() {
         ) : (
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login/student" element={<StudentLoginForm />} />
             <Route path="/login/staff" element={<StaffLoginForm />} />
             <Route path="/home" element={<Homepage />} />
             <Route path="/request-form" element={<RequestForm />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/about" element={<AboutUs />} />
             <Route
               path="/faculty-confirmation"
               element={<FacultyConfirmation />}

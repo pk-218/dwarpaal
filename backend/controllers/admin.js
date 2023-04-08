@@ -53,60 +53,42 @@ const deleteUser = (req, res) => {
     });
 };
 
-const getAllUsers = (req, res) => {
-  ssh.connect(VM_CONFIG).then(function () {
-    ssh
-      .execCommand(
-        `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${all_users}' --json;`,
-        { cwd: "./" }
-      )
-      .then(function (result) {
-        ssh.dispose();
-        res.send(JSON.parse(result.stdout));
-      });
-  });
-};
-
-const getLoggedInUsers = (req, res) => {
-  ssh.connect(VM_CONFIG).then(function () {
-    ssh
-      .execCommand(
-        `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${logged_in_users}' --json;`,
-        { cwd: "./" }
-      )
-      .then(function (result) {
-        ssh.dispose();
-        res.send(JSON.parse(result.stdout));
-      });
-  });
-};
-
-const memoryUsagePerUser = (req, res) => {
-  ssh.connect(VM_CONFIG).then(function () {
-    ssh
-      .execCommand(
-        `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${memory_usage_per_user}' --json;`,
-        { cwd: "./" }
-      )
-      .then(function (result) {
-        ssh.dispose();
-        res.send(JSON.parse(result.stdout));
-      });
-  });
-};
-
-const diskOccupied = (req, res) => {
-  ssh.connect(VM_CONFIG).then(function () {
-    ssh
-      .execCommand(
-        `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${disk_occupied}' --json;`,
-        { cwd: "./" }
-      )
-      .then(function (result) {
-        ssh.dispose();
-        res.send(JSON.parse(result.stdout));
-      });
-  });
+const getStats = (req, res) => {
+  var stats = [];
+  ssh.connect(VM_CONFIG).then(
+    function () {
+      ssh
+        .execCommand(
+          `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${all_users}' --json;`,
+          { cwd: "./" }
+        )
+        .then(function (result) {
+          stats.push(result.stdout);
+          ssh
+            .execCommand(
+              `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${memory_usage_per_user}' --json;`,
+              { cwd: "./" }
+            )
+            .then(function (result) {
+              stats.push(result.stdout);
+              ssh
+                .execCommand(
+                  `./osqueryd -S --disable_events=false --enable_bpf_events=true --enable_bpf_file_events=true --allow_unsafe=true '${logged_in_users}' --json;`,
+                  { cwd: "./" }
+                )
+                .then(function (result) {
+                  stats.push(result.stdout);
+                  ssh.dispose();
+                  res.send(stats);
+                });
+            });
+        });
+    },
+    function (error) {
+      console.log("Something's wrong");
+      console.log(error);
+    }
+  );
 };
 
 const getPendingAccessRequests = async (_, res) => {
@@ -161,12 +143,10 @@ const grantCredentials = async (_, res) => {
   console.log("Mail Send!");
   grantAccessMail("pkkhushalani_b19@it.vjti.ac.in", (err, result) => {
     if (result) {
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Grant Access mail send successfully!",
-        });
+      res.status(200).json({
+        success: true,
+        message: "Grant Access mail send successfully!",
+      });
     } else {
       res.status(500).json({ success: false, error: err });
     }
@@ -174,11 +154,7 @@ const grantCredentials = async (_, res) => {
 };
 
 export default {
-  getAllUsers,
-  getLoggedInUsers,
-  memoryUsagePerUser,
   createUser,
-  diskOccupied,
   deleteUser,
   getPendingAccessRequests,
   grantCredentials,

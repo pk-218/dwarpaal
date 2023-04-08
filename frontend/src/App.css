@@ -154,3 +154,15 @@ code {
 .navbar-toggler:focus {
   box-shadow: none;
 }
+
+.picture {
+  background: url(./images/dgx-a100.jpg) no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  left: calc(40% - 122px);
+  /* need to add media queries so that image looks presentable */
+  top: calc(40% - 100px);
+  /* need to add media queries so that image looks presentable */
+  width: 500px;
+  height: 250px;
+}
