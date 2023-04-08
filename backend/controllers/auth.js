@@ -2,6 +2,7 @@ import Speakeasy from "speakeasy";
 import QR from "qr-image";
 import { db } from "../utils/sqlConfig.js";
 import { sendOTPMail } from "../utils/mailSender.js";
+import jwt from "jsonwebtoken";
 
 const User = db.user;
 
@@ -83,8 +84,19 @@ const validateToken = (req, res) => {
             id: user.id,
             email: user.email,
           };
+          var token = jwt.sign(
+            { id: user.id, email: user.email },
+            process.env.JWT_SECRET,
+            {
+              expiresIn: 86400, // expires in 24 hours
+            }
+          );
           console.log("session user", req.session.user);
-          res.json({ isLoggedIn: true, message: "Login successful" });
+          res.json({
+            isLoggedIn: true,
+            message: "Login successful",
+            jwtToken: token,
+          });
         }
       }
     })
@@ -97,7 +109,7 @@ const logout = (req, res) => {
     if (err) {
       res.status(500).json({ message: "Error logging out" });
     } else {
-      res.json({ message: "Logout successful" });
+      res.json({ message: "Logout successful", auth: false, jwtToken: null });
     }
   });
 };
@@ -109,22 +121,11 @@ const sendCode = (req, res) => {
   console.log("Verification code:", verificationCode);
 
   sendOTPMail(email, verificationCode, (err, result) => {
-<<<<<<< HEAD
-    console.log("callback", err, result);
-    if (result) {
-      res.status(200).json({
-        error: err,
-        message: "Verification code sent to email faileds",
-      });
-=======
     if (!result) {
-      res
-        .status(554)
-        .json({
-          error: err,
-          message: "Error in sending mail!",
-        });
->>>>>>> 2b675001e37957ef4a317d9e0dbf05fa06b9a307
+      res.status(554).json({
+        error: err,
+        message: "Error in sending mail!",
+      });
     } else {
       res.status(200).json({ message: "Verification code sent to email" });
     }
@@ -207,9 +208,20 @@ const adminLogin = (req, res) => {
     req.session.admin = {
       email: email,
     };
-    res
-      .status(200)
-      .send({ success: true, msg: "Admin logged in successfully" });
+    var token = jwt.sign(
+      { email: email, isAdmin: true },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: 86400, // expires in 24 hours
+      }
+    );
+
+    res.status(200).send({
+      success: true,
+      msg: "Admin logged in successfully",
+      jwtToken: token,
+      isAdmin: true,
+    });
   } else {
     res.status(401).send({ success: false, msg: "Wrong Credentials!" });
   }

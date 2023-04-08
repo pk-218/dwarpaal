@@ -6,11 +6,7 @@ const transporter = nodemailer.createTransport({
     // type: 'OAuth2',
     user: process.env.MAILER_DOMAIN,
     pass: process.env.MAILER_PASSWORD,
-<<<<<<< HEAD
   },
-=======
-  }
->>>>>>> 2b675001e37957ef4a317d9e0dbf05fa06b9a307
 });
 
 function sendMail(mailOptions, cb) {
